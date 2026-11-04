@@ -65,13 +65,17 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
           }
         </div>
       </div>
-      <div class="field">
-        <label>Food preference</label>
-        <div class="field-row">
-          <label class="check-label"><input type="radio" formControlName="foodPref" value="veg" /> Vegetarian</label>
-          <label class="check-label"><input type="radio" formControlName="foodPref" value="nonveg" /> Non-vegetarian</label>
+      <div class="field-row">
+        <div class="field">
+          <label for="vegCount">Vegetarian</label>
+          <input id="vegCount" type="number" formControlName="vegCount" min="0" max="50" inputmode="numeric" />
+        </div>
+        <div class="field">
+          <label for="nonvegCount">Non-vegetarian</label>
+          <input id="nonvegCount" type="number" formControlName="nonvegCount" min="0" max="50" inputmode="numeric" />
         </div>
       </div>
+      <p class="muted" style="margin-top:-8px;font-size:.8125rem">Veg + non-veg should match your total head count.</p>
       <div class="field check">
         <label class="check-label" for="volunteer">
           <input id="volunteer" type="checkbox" formControlName="volunteer" />
@@ -111,7 +115,8 @@ export class RsvpPage implements OnInit {
     address: ['', [Validators.required, Validators.maxLength(255)]],
     adults: [1, [Validators.required, Validators.min(1), Validators.max(50)]],
     kids: [0, [Validators.required, Validators.min(0), Validators.max(50)]],
-    foodPref: ['veg', Validators.required],
+    vegCount: [0, [Validators.min(0), Validators.max(50)]],
+    nonvegCount: [0, [Validators.min(0), Validators.max(50)]],
     volunteer: [false],
     notes: [''],
     website: [''],
@@ -156,11 +161,17 @@ export class RsvpPage implements OnInit {
     this.serverErrors.set({});
     this.serverError.set('');
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }
+    const v0 = this.form.value;
+    if (Number(v0.vegCount) + Number(v0.nonvegCount) !== Number(v0.adults) + Number(v0.kids)) {
+      this.modalErrors.set(['Food counts should add up to your total head count.']);
+      return;
+    }
     this.sending.set(true);
     const v = this.form.value;
     const res = await this.data.rsvp({
       name: v.name!, email: v.email || 'diwali@kbar.fun', phone: v.phone!, address: v.address!,
-      adults: Number(v.adults), kids: Number(v.kids), foodPref: v.foodPref!,
+      adults: Number(v.adults), kids: Number(v.kids),
+      vegCount: Number(v.vegCount), nonvegCount: Number(v.nonvegCount),
       volunteer: !!v.volunteer, notes: v.notes || '', website: v.website || '',
     });
     this.sending.set(false);

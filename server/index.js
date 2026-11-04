@@ -46,7 +46,9 @@ app.post('/api/rsvp', async (req, res) => {
   const adults = Number.parseInt(b.adults, 10);
   const kids = Number.parseInt(b.kids, 10);
   const guests = (Number.isInteger(adults) ? adults : 0) + (Number.isInteger(kids) ? kids : 0);
-  const foodPref = b.foodPref === 'nonveg' ? 'nonveg' : 'veg';
+  const vegCount = Math.max(0, Number.parseInt(b.vegCount, 10) || 0);
+  const nonvegCount = Math.max(0, Number.parseInt(b.nonvegCount, 10) || 0);
+  const foodPref = nonvegCount > 0 ? 'nonveg' : 'veg';
   const volunteer = b.volunteer === true || b.volunteer === 'true' || b.volunteer === 1;
   if (!name || name.length > 120) errors.name = 'Please tell us your name.';
   if (!name) errors.name = 'Please tell us your name.';  if (!phone || !/^[+()\-.\s\d]{7,20}$/.test(phone)) errors.phone = 'Please enter a valid phone number.';
@@ -61,7 +63,7 @@ app.post('/api/rsvp', async (req, res) => {
     if (dup.email) errors.email = 'An RSVP already exists for this email.';
     if (dup.address) errors.address = 'An RSVP already exists for this address.';
     if (Object.keys(errors).length) return res.status(422).json({ ok: false, errors });
-    const result = await saveRsvp({ name, email, phone, address, adults, kids, guests, foodPref, volunteer, notes });
+    const result = await saveRsvp({ name, email, phone, address, adults, kids, guests, vegCount, nonvegCount, foodPref, volunteer, notes });
     res.status(201).json({ ok: true, ...result });
   } catch (e) {
     res.status(500).json({ ok: false, error: 'Could not save your RSVP — please try again.' });
