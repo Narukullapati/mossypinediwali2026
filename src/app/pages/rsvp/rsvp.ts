@@ -48,10 +48,18 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
         }
       </div>
       <div class="field addr-field">
-        <label for="address">House number</label>
-        <input id="address" type="text" formControlName="address" autocomplete="off"
-          placeholder="e.g. 10820"
-          [attr.aria-invalid]="touched('address') && form.controls.address.invalid" aria-describedby="address-err" />
+        <label for="address">House address</label>
+        <textarea id="address" formControlName="address" rows="2" autocomplete="off"
+          placeholder="Start typing your address…"
+          (input)="onAddressInput($any($event.target).value)" (blur)="hideSuggestionsSoon()"
+          [attr.aria-invalid]="touched('address') && form.controls.address.invalid" aria-describedby="address-err"></textarea>
+        @if (suggestions().length) {
+          <ul class="addr-suggestions" role="listbox">
+            @for (s of suggestions(); track s.display_name) {
+              <li role="option" (mousedown)="pickAddress(s.display_name)">{{ s.display_name }}</li>
+            }
+          </ul>
+        }
         @if (touched('address') && form.controls.address.invalid) {
           <p class="error" id="address-err">{{ err('address', 'Please add your house address.') }}</p>
         }

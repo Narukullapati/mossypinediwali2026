@@ -51,7 +51,7 @@ app.post('/api/rsvp', async (req, res) => {
   if (email && (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 190))
     errors.email = 'Please enter a valid email address.';
   if (!phone || !/^[+()\-.\s\d]{7,20}$/.test(phone)) errors.phone = 'Please enter a valid phone number.';
-  if (!address) errors.address = 'Please add your house number.';
+  if (!address) errors.address = 'Please add your house address.';
   if (!Number.isInteger(adults) || adults < 1 || adults > 50)
     errors.adults = 'Adults must be between 1 and 50.';
   if (!Number.isInteger(kids) || kids < 0 || kids > 50)
@@ -60,7 +60,7 @@ app.post('/api/rsvp', async (req, res) => {
   try {
     const dup = await existingRsvp(email, address);
     if (dup.email) errors.email = 'An RSVP already exists for this email.';
-    if (dup.address) errors.address = 'An RSVP already exists for this house number.';
+    if (dup.address) errors.address = 'An RSVP already exists for this address.';
     if (Object.keys(errors).length) return res.status(422).json({ ok: false, errors });
     const result = await saveRsvp({ name, email, phone, address, adults, kids, guests, volunteer, notes });
     res.status(201).json({ ok: true, ...result });
