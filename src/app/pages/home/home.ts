@@ -19,6 +19,7 @@ import { RangoliComponent } from '../../shared/rangoli';
   <div class="cta-row">
     <a class="btn btn-gold" routerLink="/rsvp">RSVP now</a>
   </div>
+  <img class="flyer" src="/images/flyer.jpg" alt="K-Bar Family Gathering celebration flyer — Saturday, November 21, 2026, 11 AM to 4 PM" />
   <div class="diya-row" aria-hidden="true">
     <app-diya /><app-diya /><app-diya /><app-diya /><app-diya />
   </div>

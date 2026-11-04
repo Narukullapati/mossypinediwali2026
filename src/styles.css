@@ -193,6 +193,7 @@ nav a.nav-cta:hover { background: var(--color-link); color: var(--color-base); }
 .hero-meta { margin-top: var(--space-3); }
 .venue-line { color: var(--color-text); font-weight: 600; margin-top: var(--space-2); }
 
+.flyer { max-width: 480px; width: 100%; border-radius: var(--radius-card); margin-top: var(--space-3); box-shadow: var(--shadow-hover); }
 .diya-row { display: flex; justify-content: center; gap: var(--space-3); margin-top: var(--space-4); }
 .diya-row svg { width: 56px; height: 80px; }
 @media (min-width: 768px) { .diya-row svg { width: 72px; height: 96px; } }
