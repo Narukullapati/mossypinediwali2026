@@ -73,7 +73,7 @@ async function existingRsvp(email, address) {
       'SELECT SUM(LOWER(email)=? AND email<>\'\') AS email_dup, SUM(LOWER(address)=?) AS address_dup FROM rsvps',
       [el, al],
     );
-    return { email: !!row.email_dup, address: !!row.address_dup };
+    return { email: Number(row.email_dup) > 0, address: Number(row.address_dup) > 0 };
   }
   const rows = JSON.parse(fs.readFileSync(LOCAL, 'utf8'));
   return {
