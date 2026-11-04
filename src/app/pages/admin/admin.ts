@@ -28,10 +28,7 @@ import { FormsModule } from '@angular/forms';
           <button class="btn btn-outline" (click)="download()">Download CSV</button>
         </div>
         <table class="totals-table">
-          <tr><th>Guests</th><th>Count</th></tr>
-          <tr><td>Total Non-Veg Guests</td><td>{{ totalNonveg() }}</td></tr>
-          <tr><td>Total Veg Guests</td><td>{{ totalVeg() }}</td></tr>
-          <tr><td><b>Total Guests</b></td><td><b>{{ totalGuests() }}</b></td></tr>
+          <tr><td>Total Non-Veg Guests <b>{{ totalNonveg() }}</b></td><td>Total Veg Guests <b>{{ totalVeg() }}</b></td><td><b>Total Guests {{ totalGuests() }}</b></td></tr>
         </table>
         <table class="admin-table">
           <thead><tr><th>#</th><th>Registered</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Adults</th><th>Kids</th><th>Food</th><th>Volunteer</th></tr></thead>
