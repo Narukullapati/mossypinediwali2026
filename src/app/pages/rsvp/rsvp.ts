@@ -9,7 +9,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
 <div class="rsvp">
 <section class="container hero">
   <p class="eyebrow">Save your spot</p>
-  <h1 class="glow">RSVP for Diwali</h1>
+  <h1 class="glow">RSVP — Family Gathering</h1>
   <p class="lede">Mossy Pine Family Gathering — <span class="hl">Saturday, November 21, 2026, 11:00 AM – 4:00 PM</span>.<br>
   Free for the whole community — just tell us you're coming so there's enough lunch for everyone.</p>
 </section>

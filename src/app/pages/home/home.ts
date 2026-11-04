@@ -10,7 +10,7 @@ import { RangoliComponent } from '../../shared/rangoli';
   template: `
 <section class="hero container">
   <p class="eyebrow">{{ ev()?.tagline || 'A community celebration' }}</p>
-  <h1 class="glow">Mossy Pine <span>Diwali</span></h1>
+  <h1 class="glow">Mossy Pine <span>Family Gathering</span></h1>
   <p class="venue-line">{{ ev()?.venue }}@if (ev()?.address) { · {{ ev()?.address }}}</p>
   <p class="lede">{{ ev()?.description }}</p>
   <div class="hero-meta">

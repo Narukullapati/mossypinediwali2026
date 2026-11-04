@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-const WORDS = ['Shubh Deepawali', 'Happy Diwali', 'Mossy Pine Diwali 2026', 'Festival of Lights', 'All families welcome'];
+const WORDS = ['Mossy Pine Family Gathering', 'Nov 21 · 11 AM – 4 PM', 'Community celebration', 'All families welcome', 'Games, food & fun'];
 
 @Component({
   selector: 'app-marquee',

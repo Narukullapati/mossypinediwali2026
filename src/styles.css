@@ -106,6 +106,10 @@ section { padding-block: var(--space-4); }
   min-height: var(--header-h); padding-inline: var(--space-3);
 }
 .brand img { height: var(--logo-h-sm); display: block; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.1; text-decoration: none; }
+.brand-text small { font-family: var(--font-body); font-size: .6875rem; letter-spacing: .32em; color: var(--color-primary); text-transform: uppercase; }
+.brand-text strong { font-family: var(--font-display); font-size: 1.625rem; color: var(--color-text); white-space: nowrap; }
+@media (max-width: 480px) { .brand-text strong { font-size: 1.25rem; } }
 @media (min-width: 768px) { .brand img { height: var(--logo-h); } }
 
 .menu-btn {

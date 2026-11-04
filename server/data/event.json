@@ -1,13 +1,13 @@
 {
   "details": {
-    "name": "Mossy Pine Diwali 2026",
+    "name": "Mossy Pine Family Gathering 2026",
     "tagline": "Celebrating the Festival of Lights together",
     "date": "2026-11-21",
     "dateText": "Saturday, November 21, 2026",
     "timeText": "11:00 AM – 4:00 PM",
     "venue": "K-Bar Amenity Center",
     "address": "10820 Mistflower Lane, Tampa, FL 33647",
-    "description": "A day of pooja, performances, a community lunch and diyas — the Mossy Pine families' annual Diwali celebration. Everyone is welcome."
+    "description": "A day of performances, games, a community lunch and family fun — the Mossy Pine Family Gathering 2026. Everyone is welcome."
   },
   "schedule": [
     { "time": "11:00 AM", "title": "Doors open & welcome chai", "desc": "Arrive, grab a cup of chai and find your family table as the celebrations begin." },
@@ -38,7 +38,7 @@
   ],
   "contact": {
     "org": "Mossy Pine Events Committee",
-    "name": "The Diwali organising team",
+    "name": "The organising team",
     "email": "events@mossypinediwali.fun",
     "phone": "(555) 013-2026",
     "note": "Questions about the event, volunteering or the potluck — reach out any time."
