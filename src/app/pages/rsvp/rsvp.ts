@@ -31,7 +31,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
           <p class="error" id="name-err">{{ err('name', 'Please tell us your name.') }}</p>
         }
       </div>
-      <div class="field">
+      <div class="field" hidden>
         <label for="email">Email</label>
         <input id="email" type="email" formControlName="email" autocomplete="email"
           [attr.aria-invalid]="touched('email') && form.controls.email.invalid" aria-describedby="email-err" />
@@ -48,18 +48,10 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
         }
       </div>
       <div class="field addr-field">
-        <label for="address">House address</label>
-        <textarea id="address" formControlName="address" rows="2" autocomplete="off"
-          placeholder="Start typing your address…"
-          (input)="onAddressInput($any($event.target).value)" (blur)="hideSuggestionsSoon()"
-          [attr.aria-invalid]="touched('address') && form.controls.address.invalid" aria-describedby="address-err"></textarea>
-        @if (suggestions().length) {
-          <ul class="addr-suggestions" role="listbox">
-            @for (s of suggestions(); track s.display_name) {
-              <li role="option" (mousedown)="pickAddress(s.display_name)">{{ s.display_name }}</li>
-            }
-          </ul>
-        }
+        <label for="address">House number</label>
+        <input id="address" type="text" formControlName="address" autocomplete="off"
+          placeholder="e.g. 10820"
+          [attr.aria-invalid]="touched('address') && form.controls.address.invalid" aria-describedby="address-err" />
         @if (touched('address') && form.controls.address.invalid) {
           <p class="error" id="address-err">{{ err('address', 'Please add your house address.') }}</p>
         }
@@ -116,7 +108,7 @@ export class RsvpPage implements OnInit {
   private data = inject(DataService);
   form = this.fb.group({
     name: ['', [Validators.required, Validators.maxLength(120)]],
-    email: ['', [Validators.required, Validators.email, Validators.maxLength(190)]],
+    email: ['', [Validators.email, Validators.maxLength(190)]],
     phone: ['', [Validators.required, Validators.pattern(/^[+()\-.\s\d]{7,20}$/)]],
     address: ['', [Validators.required, Validators.maxLength(255)]],
     adults: [1, [Validators.required, Validators.min(1), Validators.max(50)]],

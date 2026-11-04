@@ -66,18 +66,18 @@ async function initStore() {
 }
 
 async function existingRsvp(email, address) {
-  const el = email.toLowerCase(), al = address.toLowerCase();
+  const el = (email || '').toLowerCase(), al = (address || '').toLowerCase();
   const p = getPool();
   if (p) {
     const [[row]] = await p.query(
-      'SELECT SUM(LOWER(email)=?) AS email_dup, SUM(LOWER(address)=?) AS address_dup FROM rsvps',
+      'SELECT SUM(LOWER(email)=? AND email<>\'\') AS email_dup, SUM(LOWER(address)=?) AS address_dup FROM rsvps',
       [el, al],
     );
     return { email: !!row.email_dup, address: !!row.address_dup };
   }
   const rows = JSON.parse(fs.readFileSync(LOCAL, 'utf8'));
   return {
-    email: rows.some(r => (r.email || '').toLowerCase() === el),
+    email: el !== '' && rows.some(r => (r.email || '').toLowerCase() === el),
     address: rows.some(r => r.address && r.address.toLowerCase() === al),
   };
 }
