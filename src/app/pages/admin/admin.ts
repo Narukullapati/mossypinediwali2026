@@ -37,7 +37,7 @@ import { FormsModule } from '@angular/forms';
         </table>
         <ul class="rsvp-list">
           @for (r of rsvps(); track r.id; let i = $index) {
-            <li><b>{{ i + 1 }}.</b><span>{{ r.food_pref === 'nonveg' ? '🔴' : '🟢' }} {{ r.name }}</span><i>{{ r.guests }} guests</i></li>
+            <li><b>{{ i + 1 }}.</b><span>{{ r.name }}</span><i>{{ r.guests }} guests 🟢{{ r.veg_count ?? 0 }} 🔴{{ r.nonveg_count ?? 0 }}</i></li>
           }
         </ul>
       }
