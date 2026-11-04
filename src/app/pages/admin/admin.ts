@@ -118,7 +118,7 @@ import { FormsModule } from '@angular/forms';
   .excel-body{flex:1;overflow:auto;min-height:0;background:#fff}
   @media(max-width:768px){.excel-body{height:58vh;flex:none}}
   .admin-grid{overflow-x:hidden}
-  .sug-tabs{background:transparent;padding:8px 10px 0;flex-wrap:nowrap;justify-content:flex-start;align-items:flex-end;gap:4px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid #E5EAF2}
+  .sug-tabs{flex-shrink:0;background:transparent;padding:8px 10px 0;flex-wrap:nowrap;justify-content:flex-start;align-items:flex-end;gap:4px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid #E5EAF2}
   .sug-tabs::-webkit-scrollbar{display:none}
   .sug-tabs a{
     font-size:.82rem;padding-inline:16px;min-height:34px;flex-shrink:0;white-space:nowrap;
@@ -129,7 +129,7 @@ import { FormsModule } from '@angular/forms';
   .sug-tabs a:hover{color:var(--color-primary)}
   .dl-xls{margin-left:auto;position:sticky;right:0;background:#fff;border:1px solid #E5EAF2;cursor:pointer;padding:4px;line-height:0;border-radius:6px;flex-shrink:0;align-self:center}
   .dl-xls:hover{background:#F1F5FA}
-  .sug-toolbar{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid #E5EAF2;background:#fff}
+  .sug-toolbar{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid #E5EAF2;background:#fff}
   .sug-title{font-weight:700;color:#1F3A5F;font-size:.92rem}
   .tbl-filter{margin-left:auto;border:1px solid #DCE3EE;border-radius:6px;padding:6px 12px;font:inherit;font-size:.85rem;min-width:200px;max-width:320px;background:#fff;color:#2E3E52}
   .tbl-filter::placeholder{color:#9AA8BD}
