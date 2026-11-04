@@ -32,9 +32,9 @@
   --focus-ring: 3px solid var(--color-focus);  --focus-offset: 2px;
   /* layout */
   --content-max: 1200px;
-  --header-h: 72px;
-  --logo-h: 48px;
-  --logo-h-sm: 40px;
+  --header-h: 96px;
+  --logo-h: 80px;
+  --logo-h-sm: 56px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
