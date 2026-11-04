@@ -52,6 +52,7 @@ async function initStore() {
     ]) {
       try { await p.query(`ALTER TABLE rsvps ${col}`); } catch (e) { /* already there */ }
     }
+    await p.query('CREATE TABLE IF NOT EXISTS settings (k VARCHAR(64) PRIMARY KEY, v TEXT)');
     await p.query(`CREATE TABLE IF NOT EXISTS registrations (
       id INT AUTO_INCREMENT PRIMARY KEY,
       type VARCHAR(16) NOT NULL,
@@ -142,4 +143,56 @@ async function rsvpStats() {
   return { rsvps: rows.length, guests: rows.reduce((n, r) => n + (r.guests || 0), 0) };
 }
 
-module.exports = { initStore, existingRsvp, saveRsvp, saveRegistration, listRsvps, listRegistrations, rsvpStats };
+async function suggestAddresses(q) {
+  const ql = (q || '').toLowerCase();
+  if (!ql) return [];
+  const p = getPool();
+  if (p) {
+    const [rows] = await p.query(
+      "SELECT DISTINCT address FROM rsvps WHERE address <> '' AND LOWER(address) LIKE ? LIMIT 6",
+      [`%${ql}%`],
+    );
+    return rows.map(r => r.address);
+  }
+  const rows = JSON.parse(fs.readFileSync(LOCAL, 'utf8'));
+  const seen = new Set();
+  return rows
+    .map(r => r.address || '')
+    .filter(a => a && a.toLowerCase().includes(ql) && !seen.has(a.toLowerCase()) && seen.add(a.toLowerCase()))
+    .slice(0, 6);
+}
+
+async function getRsvpByAddress(address) {
+  const al = (address || '').toLowerCase();
+  if (!al) return null;
+  const p = getPool();
+  if (p) {
+    const [[row]] = await p.query('SELECT name, phone FROM rsvps WHERE LOWER(address)=? LIMIT 1', [al]);
+    return row || null;
+  }
+  const rows = JSON.parse(fs.readFileSync(LOCAL, 'utf8'));
+  return rows.find(r => r.address && r.address.toLowerCase() === al) || null;
+}
+
+const SETTINGS = path.join(__dirname, 'data', 'settings.local.json');
+async function getSetting(key) {
+  const p = getPool();
+  if (p) {
+    const [[r]] = await p.query('SELECT v FROM settings WHERE k=?', [key]);
+    return r ? JSON.parse(r.v) : null;
+  }
+  if (!fs.existsSync(SETTINGS)) return null;
+  return JSON.parse(fs.readFileSync(SETTINGS, 'utf8'))[key] ?? null;
+}
+async function setSetting(key, val) {
+  const p = getPool();
+  if (p) {
+    await p.query('INSERT INTO settings (k,v) VALUES (?,?) ON DUPLICATE KEY UPDATE v=VALUES(v)', [key, JSON.stringify(val)]);
+    return;
+  }
+  const d = fs.existsSync(SETTINGS) ? JSON.parse(fs.readFileSync(SETTINGS, 'utf8')) : {};
+  d[key] = val;
+  fs.writeFileSync(SETTINGS, JSON.stringify(d, null, 2));
+}
+
+module.exports = { initStore, existingRsvp, saveRsvp, saveRegistration, listRsvps, listRegistrations, rsvpStats, suggestAddresses, getRsvpByAddress, getSetting, setSetting };

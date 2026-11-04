@@ -23,7 +23,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
   } @else {
     <form class="card form-card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
       <div class="field">
-        <label for="name">Your name</label>
+        <label for="name" data-tip="Enter your full name">Your name <span class="req">*</span></label>
         <input id="name" type="text" formControlName="name" autocomplete="name"
           [attr.aria-invalid]="touched('name') && form.controls.name.invalid" aria-describedby="name-err" />
         @if (touched('name') && form.controls.name.invalid) {
@@ -31,7 +31,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
         }
       </div>
       <div class="field">
-        <label for="phone">Phone number</label>
+        <label for="phone" data-tip="Your phone number">Phone number <span class="req">*</span></label>
         <input id="phone" type="tel" formControlName="phone" autocomplete="tel"
           [attr.aria-invalid]="touched('phone') && form.controls.phone.invalid" aria-describedby="phone-err" />
         @if (touched('phone') && form.controls.phone.invalid) {
@@ -39,7 +39,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
         }
       </div>
       <div class="field addr-field">
-        <label for="address">House address</label>
+        <label for="address" data-tip="House address — must be unique per RSVP">House address <span class="req">*</span></label>
         <input id="address" type="text" formControlName="address" autocomplete="street-address"
           placeholder="House no, street — helps us map the neighbourhood"
           [attr.aria-invalid]="touched('address') && form.controls.address.invalid" aria-describedby="address-err" />
@@ -49,7 +49,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
       </div>
       <div class="field-row">
         <div class="field">
-          <label for="adults">Adults</label>
+          <label for="adults" data-tip="Number of adults">Adults <span class="req">*</span></label>
           <input id="adults" type="number" formControlName="adults" min="1" max="50" inputmode="numeric"
             [attr.aria-invalid]="touched('adults') && form.controls.adults.invalid" aria-describedby="adults-err" />
           @if (touched('adults') && form.controls.adults.invalid) {
@@ -57,7 +57,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
           }
         </div>
         <div class="field">
-          <label for="kids">Kids</label>
+          <label for="kids" data-tip="Number of kids">Kids</label>
           <input id="kids" type="number" formControlName="kids" min="0" max="50" inputmode="numeric"
             [attr.aria-invalid]="touched('kids') && form.controls.kids.invalid" aria-describedby="kids-err" />
           @if (touched('kids') && form.controls.kids.invalid) {
@@ -67,17 +67,17 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
       </div>
       <div class="field-row">
         <div class="field">
-          <label for="vegCount">Vegetarian</label>
+          <label for="vegCount" data-tip="How many vegetarian guests">Vegetarian</label>
           <input id="vegCount" type="number" formControlName="vegCount" min="0" max="50" inputmode="numeric" />
         </div>
         <div class="field">
-          <label for="nonvegCount">Non-vegetarian</label>
+          <label for="nonvegCount" data-tip="How many non-vegetarian guests">Non-vegetarian</label>
           <input id="nonvegCount" type="number" formControlName="nonvegCount" min="0" max="50" inputmode="numeric" />
         </div>
       </div>
       <p class="muted" style="margin-top:-8px;font-size:.8125rem">Veg + non-veg should match your total head count.</p>
       <div class="field check">
-        <label class="check-label" for="volunteer">
+        <label class="check-label" for="volunteer" data-tip="Check if you can help at the event">
           <input id="volunteer" type="checkbox" formControlName="volunteer" />
           I'd like to volunteer / help the organizers
         </label>

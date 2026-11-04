@@ -1,7 +1,18 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const { initStore, existingRsvp, saveRsvp, saveRegistration, listRsvps, listRegistrations, rsvpStats } = require('./db');
+const multer = require('multer');
+const { initStore, existingRsvp, saveRsvp, saveRegistration, listRsvps, listRegistrations, rsvpStats, suggestAddresses, getRsvpByAddress, getSetting, setSetting } = require('./db');
+
+const UPLOAD_DIR = path.join(__dirname, 'uploads');
+fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: UPLOAD_DIR,
+    filename: (req, f, cb) => cb(null, Date.now() + '-' + (f.originalname || 'file').replace(/[^\w.\-]+/g, '_').slice(-60)),
+  }),
+  limits: { fileSize: 50 * 1024 * 1024 },
+});
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '4466';
 const adminOnly = (req, res, next) =>
@@ -86,6 +97,90 @@ app.post('/api/register', async (req, res) => {
   } catch (e) {
     res.status(500).json({ ok: false, error: 'Could not save — please try again.' });
   }
+});
+
+app.post('/api/register/cultural', upload.single('audio'), async (req, res) => {
+  const b = req.body || {};
+  const s = (v, n) => (typeof v === 'string' ? v.trim().slice(0, n) : '');
+  const team = s(b.team, 120), performers = s(b.performers, 600), perfType = s(b.perfType, 200);
+  const choreo = s(b.choreo, 120), duration = s(b.duration, 20), contact = s(b.contact, 20), email = s(b.email, 160);
+  const errors = {};
+  if (!team) errors.team = 'Required';
+  if (!performers) errors.performers = 'Required';
+  if (!perfType) errors.perfType = 'Required';
+  if (!choreo) errors.choreo = 'Required';
+  if (!duration) errors.duration = 'Required';
+  if (!contact) errors.contact = 'Required';
+  if (!email) errors.email = 'Required';
+  if (Object.keys(errors).length) return res.status(422).json({ ok: false, errors });
+  const details = [
+    `Team: ${team}`, `Performers: ${performers}`, `Type: ${perfType}`,
+    `Choreographer: ${choreo}`, `Duration: ${duration} min`, `Email: ${email}`,
+    req.file ? `Audio: ${req.file.filename}` : 'Audio: none',
+  ].join(' | ');
+  try {
+    const result = await saveRegistration({ type: 'cultural', name: performers, phone: contact, details });
+    res.status(201).json({ ok: true, ...result });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: 'Could not save — please try again.' });
+  }
+});
+
+app.get('/api/address-suggest', async (req, res) => {
+  try { res.json({ suggestions: await suggestAddresses(String(req.query.q || '')) }); }
+  catch { res.status(500).json({ suggestions: [] }); }
+});
+
+app.post('/api/register/food', async (req, res) => {
+  const b = req.body || {};
+  const s = (v, n) => (typeof v === 'string' ? v.trim().slice(0, n) : '');
+  const address = s(b.address, 255), category = s(b.category, 120), dish = s(b.dish, 300);
+  const spice = s(b.spice, 20), qty = s(b.qty, 80), warming = s(b.warming, 60), spoons = s(b.spoons, 10);
+  const dietary = ['Vegetarian','Vegan','Jain (no onion/garlic)','Contains nuts','Contains dairy','Gluten-free','Halal']
+    .filter((d, i) => [b.veg, b.vegan, b.jain, b.nuts, b.dairy, b.glutenFree, b.halal][i]);
+  const errors = {};
+  if (!address) errors.address = 'Required';
+  if (!category) errors.category = 'Required';
+  if (!dish) errors.dish = 'Required';
+  if (!spice) errors.spice = 'Required';
+  if (!qty) errors.qty = 'Required';
+  if (!warming) errors.warming = 'Required';
+  if (!spoons) errors.spoons = 'Required';
+  if (Object.keys(errors).length) return res.status(422).json({ ok: false, errors });
+  const rsvp = await getRsvpByAddress(address);
+  if (!rsvp) return res.status(422).json({ ok: false, errors: { address: 'Home address must match an existing RSVP.' } });
+  const closed = (await getSetting('closedCategories')) || [];
+  if (closed.includes(category)) return res.status(422).json({ ok: false, errors: { category: 'This category is full — please pick another.' } });
+  const details = [
+    `Category: ${category}`, `Dish: ${dish}`,
+    `Dietary: ${dietary.length ? dietary.join(', ') : 'none'}`, `Spice: ${spice}`,
+    `Serves: ${qty}`, `Warming: ${warming}`, `Serving spoons: ${spoons}`, `Address: ${address}`,
+  ].join(' | ');
+  try {
+    const result = await saveRegistration({ type: 'food', name: rsvp.name, phone: rsvp.phone, details });
+    res.status(201).json({ ok: true, ...result });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: 'Could not save — please try again.' });
+  }
+});
+
+app.get('/api/closed-categories', async (req, res) => {
+  try { res.json({ closed: (await getSetting('closedCategories')) || [] }); }
+  catch { res.status(500).json({ closed: [] }); }
+});
+
+app.put('/api/admin/closed-categories', adminOnly, express.json(), async (req, res) => {
+  const c = req.body?.closed;
+  if (!Array.isArray(c)) return res.status(400).json({ error: 'invalid' });
+  await setSetting('closedCategories', c.slice(0, 20).map(x => String(x).slice(0, 80)));
+  res.json({ ok: true });
+});
+
+app.get('/api/admin/file/:name', adminOnly, (req, res) => {
+  const name = path.basename(req.params.name || '');
+  const file = path.join(UPLOAD_DIR, name);
+  if (!name || !fs.existsSync(file)) return res.status(404).end();
+  res.sendFile(file);
 });
 
 app.get('/api/admin/rsvps', adminOnly, async (req, res) => {

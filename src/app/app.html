@@ -2,6 +2,7 @@
 
 <header class="site-header">
   <app-marquee />
+  <img class="header-banner" src="/images/banner.jpg" alt="K-Bar Mossy Pine Family Gathering" />
   <div class="header-main">
   <a class="brand" routerLink="/" aria-label="Mossy Pine Family Gathering — home">
     <span class="brand-text"><small>KBar · Mossy Pine</small><strong>Family Gathering</strong></span>
@@ -19,6 +20,23 @@
     <a class="nav-cta" routerLink="/rsvp" routerLinkActive="active" (click)="menuOpen = false">RSVP</a>
   </nav>
   </div>
+  <nav class="tabbar" aria-label="Quick menu">
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" aria-label="Home" data-tip="Home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21h-6v-6H9v6H3z"/></svg><span>Home</span>
+  </a>
+  <a class="fab" routerLink="/rsvp" routerLinkActive="active" aria-label="RSVP" data-tip="RSVP">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span>RSVP</span>
+  </a>
+  <a routerLink="/cultural" routerLinkActive="active" aria-label="Cultural activity" data-tip="Cultural Activity">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Cultural</span>
+  </a>
+  <a routerLink="/food" routerLinkActive="active" aria-label="Food" data-tip="Food Registration">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/></svg><span>Food</span>
+  </a>
+  <a routerLink="/admin" routerLinkActive="active" aria-label="Admin" data-tip="Admin">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Admin</span>
+  </a>
+  </nav>
 </header>
 
 <main id="main">
