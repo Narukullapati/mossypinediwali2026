@@ -1,0 +1,46 @@
+{
+  "details": {
+    "name": "Mossy Pine Diwali 2026",
+    "tagline": "Celebrating the Festival of Lights together",
+    "date": "2026-11-21",
+    "dateText": "Saturday, November 21, 2026",
+    "timeText": "from 11:00 AM",
+    "venue": "K-Bar Amenity Center",
+    "address": "10820 Mistflower Lane, Tampa, FL 33647",
+    "description": "A day of pooja, performances, a community lunch and diyas — the Mossy Pine families' annual Diwali celebration. Everyone is welcome."
+  },
+  "schedule": [
+    { "time": "11:00 AM", "title": "Doors open & welcome chai", "desc": "Arrive, grab a cup of chai and find your family table as the celebrations begin." },
+    { "time": "11:30 AM", "title": "Lakshmi–Ganesh pooja", "desc": "We begin the day with the traditional pooja, led by community elders." },
+    { "time": "12:30 PM", "title": "Kids' performances & cultural showcase", "desc": "Dances, songs and skits by the children of Mossy Pine — always the crowd favourite." },
+    { "time": "1:30 PM", "title": "Community lunch", "desc": "The potluck feast opens — starters, mains, sweets and chai, all made by our families." },
+    { "time": "3:00 PM", "title": "Games & family activities", "desc": "Tambola, rangoli competition and fun for all ages." },
+    { "time": "5:00 PM", "title": "Diya lighting & aarti", "desc": "As the sun sets, we light diyas together and fill the hall with a hundred tiny flames." },
+    { "time": "5:30 PM", "title": "Sparklers & fireworks", "desc": "Family-safe sparklers in the courtyard — bring the kids, gloves provided." },
+    { "time": "6:00 PM", "title": "Music, dance & open floor", "desc": "Bollywood favourites and garba on the open floor until close." }
+  ],
+  "potluck": {
+    "note": "Our lunch is a community potluck — tell us what you're bringing when you RSVP.",
+    "menu": [
+      { "title": "Starters", "items": "Samosas, pakoras, chaat, dhokla" },
+      { "title": "Mains", "items": "Biryani, paneer butter masala, dal makhani, jeera rice, roti & naan" },
+      { "title": "Sweets", "items": "Gulab jamun, kaju katli, jalebi, kheer, laddu" },
+      { "title": "Drinks", "items": "Masala chai, mango lassi, nimbu pani" }
+    ]
+  },
+  "gallery": [
+    { "src": "/images/g1.svg", "alt": "Lit diyas arranged in a row on a decorated table" },
+    { "src": "/images/g2.svg", "alt": "Colourful rangoli pattern at the hall entrance" },
+    { "src": "/images/g3.svg", "alt": "Families lighting sparklers in the courtyard" },
+    { "src": "/images/g4.svg", "alt": "Kids performing a group dance on stage" },
+    { "src": "/images/g5.svg", "alt": "Sweets and snacks laid out for the community lunch" },
+    { "src": "/images/g6.svg", "alt": "Marigold and fairy light decorations across the stage" }
+  ],
+  "contact": {
+    "org": "Mossy Pine Events Committee",
+    "name": "The Diwali organising team",
+    "email": "events@mossypinediwali.fun",
+    "phone": "(555) 013-2026",
+    "note": "Questions about the event, volunteering or the potluck — reach out any time."
+  }
+}

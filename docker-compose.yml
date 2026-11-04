@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: ${DB_NAME:-diwali}
+      DB_USER: ${DB_USER:-diwali}
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env or the environment}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-mossypine}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-diwali}
+      MYSQL_USER: ${DB_USER:-diwali}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env or the environment}
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-p$$MYSQL_PASSWORD", "-u", "$$MYSQL_USER"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  dbdata:
