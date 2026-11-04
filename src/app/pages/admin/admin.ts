@@ -21,7 +21,7 @@ import { FormsModule } from '@angular/forms';
         <a role="tab" [class.on]="tab() === 'rsvp'" (click)="tab.set('rsvp')" style="cursor:pointer">RSVP ({{ rsvps().length }})</a>
         <a role="tab" [class.on]="tab() === 'cultural'" (click)="tab.set('cultural')" style="cursor:pointer">Cultural ({{ cultural().length }})</a>
         @if (false) { <a role="tab" [class.on]="tab() === 'food'" (click)="tab.set('food')" style="cursor:pointer">Food ({{ food().length }})</a> }
-        <a role="tab" [class.on]="tab() === 'settings'" (click)="tab.set('settings')" style="cursor:pointer">Categories</a>
+        @if (false) { <a role="tab" [class.on]="tab() === 'settings'" (click)="tab.set('settings')" style="cursor:pointer">Categories</a> }
         @if (tab() !== 'settings') {
           <button class="dl-xls" type="button" (click)="download()" title="Download Excel" aria-label="Download Excel">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1D6F42" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="6 11 12 17 18 11"/><path d="M4 21h16"/></svg>
