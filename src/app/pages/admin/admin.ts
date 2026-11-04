@@ -35,6 +35,11 @@ import { FormsModule } from '@angular/forms';
             }
           </tbody>
         </table>
+        <ul class="rsvp-list">
+          @for (r of rsvps(); track r.id) {
+            <li><b>#{{ r.id }}</b><span>{{ r.name }}</span><i>{{ r.guests }} guests</i></li>
+          }
+        </ul>
       }
       @if (tab() === 'cultural') {
         <h3>Cultural activity registrations</h3>
@@ -70,7 +75,12 @@ import { FormsModule } from '@angular/forms';
   .admin-table th,.admin-table td{padding:6px;text-align:left;border-bottom:1px solid var(--color-surface);word-break:break-word;vertical-align:top}
   .admin-table th{color:var(--color-primary);font-weight:700}
   .admin-table td:nth-child(-n+2){white-space:nowrap}
-  @media(max-width:768px){.admin-table{font-size:.6875rem}.admin-table th,.admin-table td{padding:4px}}`,
+  .rsvp-list{display:none;list-style:none;margin:8px 0 0;padding:0}
+  .rsvp-list li{padding:8px 2px;border-bottom:1px solid var(--color-surface);display:flex;gap:8px;align-items:baseline;font-size:.9375rem}
+  .rsvp-list b{color:var(--color-primary);font-weight:700;white-space:nowrap}
+  .rsvp-list span{flex:1;min-width:0;word-break:break-word}
+  .rsvp-list i{font-style:normal;color:var(--color-primary);white-space:nowrap}
+  @media(max-width:768px){.admin-table{display:none}.rsvp-list{display:block}}`,
 })
 export class AdminPage {
   pw = '';
