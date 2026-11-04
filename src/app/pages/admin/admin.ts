@@ -27,12 +27,11 @@ import { FormsModule } from '@angular/forms';
           <h3>RSVPs</h3>
           <button class="btn btn-outline" (click)="download()">Download CSV</button>
         </div>
-        <div class="totals">
-          <p>Total Non-Veg Guests — {{ totalNonveg() }}</p>
-          <p>Total Veg Guests — {{ totalVeg() }}</p>
-          <p>─────────</p>
-          <p><b>Total Guests — {{ totalGuests() }}</b></p>
-        </div>
+        <table class="totals-table">
+          <tr><td>Total Non-Veg Guests</td><td>{{ totalNonveg() }}</td></tr>
+          <tr><td>Total Veg Guests</td><td>{{ totalVeg() }}</td></tr>
+          <tr><td><b>Total Guests</b></td><td><b>{{ totalGuests() }}</b></td></tr>
+        </table>
         <table class="admin-table">
           <thead><tr><th>#</th><th>Registered</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Adults</th><th>Kids</th><th>Food</th><th>Volunteer</th></tr></thead>
           <tbody>
@@ -77,7 +76,9 @@ import { FormsModule } from '@angular/forms';
   .big-tabs a{font-size:.875rem;padding-inline:var(--space-2);min-height:40px}
   .admin-grid{overflow-x:auto;margin-top:0;border-top-left-radius:0}
   .grid-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-  .totals p{margin:0 0 2px;font-size:.9375rem}
+  .totals-table{border-collapse:collapse;margin-bottom:8px;font-size:.9375rem}
+  .totals-table td{padding:6px 16px;border:1px solid var(--color-surface)}
+  .totals-table td:last-child{text-align:right;font-weight:700;color:var(--color-primary)}
   .admin-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.8125rem;table-layout:fixed}
   .admin-table th,.admin-table td{padding:6px;text-align:left;border-bottom:1px solid var(--color-surface);word-break:break-word;vertical-align:top}
   .admin-table th{color:var(--color-primary);font-weight:700}
