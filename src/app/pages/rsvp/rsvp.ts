@@ -10,7 +10,8 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
 <section class="container hero">
   <p class="eyebrow">Save your spot</p>
   <h1 class="glow">RSVP for Diwali</h1>
-  <p class="lede">Free for the whole community — just tell us you're coming so there's enough lunch for everyone.</p>
+  <p class="lede">Mossy Pine Family Gathering — Saturday, November 21, 2026 at 11:00 AM.<br>
+  Free for the whole community — just tell us you're coming so there's enough lunch for everyone.</p>
 </section>
 
 <section class="container">
