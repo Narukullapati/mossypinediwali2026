@@ -10,7 +10,7 @@ import { RangoliComponent } from '../../shared/rangoli';
 <section class="container hero">
   <p class="eyebrow">Run of show</p>
   <h1 class="glow">The evening, hour by hour</h1>
-  <p class="lede">Saturday, November 21, 2026 · from 11:00 AM · K-Bar Amenity Center, Tampa</p>
+  <p class="lede">Saturday, November 21, 2026 · 11:00 AM – 4:00 PM · K-Bar Amenity Center, Tampa</p>
 </section>
 
 <app-rangoli />

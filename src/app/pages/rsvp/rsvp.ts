@@ -10,7 +10,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
 <section class="container hero">
   <p class="eyebrow">Save your spot</p>
   <h1 class="glow">RSVP for Diwali</h1>
-  <p class="lede">Mossy Pine Family Gathering — Saturday, November 21, 2026 at 11:00 AM.<br>
+  <p class="lede">Mossy Pine Family Gathering — <span class="hl">Saturday, November 21, 2026, 11:00 AM – 4:00 PM</span>.<br>
   Free for the whole community — just tell us you're coming so there's enough lunch for everyone.</p>
 </section>
 
@@ -20,7 +20,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
       <p class="big">See you there!</p>
       <p>Thanks, {{ name() }} — your RSVP is in.
         @if (stats(); as s) { You're one of {{ s.guests }} guests coming so far. }</p>
-      <p class="muted">Details: Saturday, November 21, 2026 · from 11:00 AM · K-Bar Amenity Center, Tampa</p>
+      <p class="muted">Details: Saturday, November 21, 2026 · 11:00 AM – 4:00 PM · K-Bar Amenity Center, Tampa</p>
     </div>
   } @else {
     <form class="card form-card" [formGroup]="form" (ngSubmit)="submit()" novalidate>

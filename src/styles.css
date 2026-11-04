@@ -314,6 +314,8 @@ input[type="checkbox"] { width: 24px; height: 24px; min-height: auto; accent-col
 .reg-tabs a.on { background: var(--color-surface); color: var(--color-primary); }
 .reg-tabs a:hover { color: var(--color-link); }
 
+.hl { color: var(--color-primary); font-weight: 700; }
+
 /* ---------- rsvp page density ---------- */
 .rsvp .hero { padding-block: var(--space-2); }
 .rsvp .hero .lede { font-size: 1.0625rem; margin-bottom: 0; }
