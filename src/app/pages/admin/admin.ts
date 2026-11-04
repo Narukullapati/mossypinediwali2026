@@ -68,7 +68,7 @@ import { FormsModule } from '@angular/forms';
 </section>
   `,
   styles: `.admin-section{max-width:1600px}
-  .big-tabs a{font-size:1.0625rem;padding-inline:var(--space-4)}
+  .big-tabs a{font-size:.875rem;padding-inline:var(--space-2);min-height:40px}
   .admin-grid{overflow-x:auto;margin-top:0;border-top-left-radius:0}
   .grid-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
   .admin-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.8125rem;table-layout:fixed}
