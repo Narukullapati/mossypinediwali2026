@@ -71,7 +71,9 @@ import { FormsModule } from '@angular/forms';
 </section>
   `,
   styles: `.admin-section{max-width:1600px}
+  .big-tabs{flex-wrap:wrap;justify-content:flex-start}
   .big-tabs a{font-size:.875rem;padding-inline:var(--space-2);min-height:40px}
+  @media(max-width:768px){.big-tabs{justify-content:center}.big-tabs a{font-size:.8125rem;padding-inline:10px;min-height:36px}}
   .admin-grid{overflow-x:auto;margin-top:0;border-top-left-radius:0}
   .grid-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
   .totals-table{border-collapse:collapse;margin-bottom:8px;font-size:.9375rem;border:2px solid var(--color-primary)}
