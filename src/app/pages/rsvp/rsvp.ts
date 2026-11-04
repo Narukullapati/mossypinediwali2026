@@ -89,7 +89,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
       <button class="btn btn-gold" type="submit" [disabled]="sending()">
         {{ sending() ? 'Sending…' : 'Submit RSVP' }}
       </button>
-      <p class="muted" style="margin-top: var(--space-2)">No payment, no account — we just need to know you're coming.</p>
+
     </form>
   }
   @if (modalErrors().length) {
