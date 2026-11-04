@@ -31,13 +31,13 @@ import { FormsModule } from '@angular/forms';
           <thead><tr><th>#</th><th>Registered</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Adults</th><th>Kids</th><th>Food</th><th>Volunteer</th></tr></thead>
           <tbody>
             @for (r of rsvps(); track r.id; let i = $index) {
-              <tr><td>{{ i + 1 }}</td><td>{{ fmt(r.created_at) }}</td><td>{{ r.name }}</td><td>{{ r.email }}</td><td>{{ r.phone }}</td><td>{{ r.address }}</td><td>{{ r.adults }}</td><td>{{ r.kids }}</td><td>{{ r.food_pref === 'nonveg' ? 'Non-veg' : 'Veg' }}</td><td>{{ r.volunteer ? 'Yes' : 'No' }}</td></tr>
+              <tr><td>{{ i + 1 }}</td><td>{{ fmt(r.created_at) }}</td><td>{{ r.name }}</td><td>{{ r.email }}</td><td>{{ r.phone }}</td><td>{{ r.address }}</td><td>{{ r.adults }}</td><td>{{ r.kids }}</td><td>{{ r.food_pref === 'nonveg' ? '🔴 Non-veg' : '🟢 Veg' }}</td><td>{{ r.volunteer ? 'Yes' : 'No' }}</td></tr>
             }
           </tbody>
         </table>
         <ul class="rsvp-list">
           @for (r of rsvps(); track r.id; let i = $index) {
-            <li><b>{{ i + 1 }}.</b><span>{{ r.name }}</span><i>{{ r.guests }} guests</i></li>
+            <li><b>{{ i + 1 }}.</b><span>{{ r.food_pref === 'nonveg' ? '🔴' : '🟢' }} {{ r.name }}</span><i>{{ r.guests }} guests</i></li>
           }
         </ul>
       }
