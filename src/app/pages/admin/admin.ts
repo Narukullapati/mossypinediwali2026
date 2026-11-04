@@ -76,7 +76,7 @@ import { FormsModule } from '@angular/forms';
   .grid-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
   .totals-table{border-collapse:collapse;margin-bottom:8px;font-size:.9375rem;border:2px solid var(--color-primary)}
   .totals-table th{padding:6px 16px;border:1px solid var(--color-primary);text-align:left;color:var(--color-primary)}
-  .totals-table td{padding:6px 16px;border:1px solid var(--color-primary)}
+  .totals-table td{padding:6px 12px;border:1px solid var(--color-primary);white-space:nowrap}
   .totals-table td:last-child{text-align:right;font-weight:700;color:var(--color-primary)}
   .admin-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.8125rem;table-layout:fixed}
   .admin-table th,.admin-table td{padding:6px;text-align:left;border-bottom:1px solid var(--color-surface);word-break:break-word;vertical-align:top}
