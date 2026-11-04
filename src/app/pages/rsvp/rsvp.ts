@@ -40,9 +40,9 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
       </div>
       <div class="field addr-field">
         <label for="address">House address</label>
-        <textarea id="address" formControlName="address" rows="2" autocomplete="street-address"
+        <input id="address" type="text" formControlName="address" autocomplete="street-address"
           placeholder="House no, street — helps us map the neighbourhood"
-          [attr.aria-invalid]="touched('address') && form.controls.address.invalid" aria-describedby="address-err"></textarea>
+          [attr.aria-invalid]="touched('address') && form.controls.address.invalid" aria-describedby="address-err" />
         @if (touched('address') && form.controls.address.invalid) {
           <p class="error" id="address-err">{{ err('address', 'Please add your house address.') }}</p>
         }
