@@ -44,6 +44,7 @@ async function initStore() {
       'ADD COLUMN adults INT',
       'ADD COLUMN kids INT',
       'ADD COLUMN address VARCHAR(255)',
+      'ADD COLUMN food_pref VARCHAR(16)',
       'ADD COLUMN volunteer TINYINT(1) NOT NULL DEFAULT 0',
       'ADD UNIQUE KEY uq_rsvp_address (address)',
     ]) {
@@ -81,17 +82,17 @@ async function existingRsvp(email, address) {
   };
 }
 
-async function saveRsvp({ name, email, phone, address, adults, kids, guests, volunteer, notes }) {
+async function saveRsvp({ name, email, phone, address, adults, kids, guests, foodPref, volunteer, notes }) {
   const p = getPool();
   if (p) {
     const [r] = await p.query(
-      'INSERT INTO rsvps (name, email, phone, address, adults, kids, guests, volunteer, notes) VALUES (?,?,?,?,?,?,?,?,?)',
-      [name, email, phone, address, adults, kids, guests, volunteer ? 1 : 0, notes || null],
+      'INSERT INTO rsvps (name, email, phone, address, adults, kids, guests, food_pref, volunteer, notes) VALUES (?,?,?,?,?,?,?,?,?,?)',
+      [name, email, phone, address, adults, kids, guests, foodPref || 'veg', volunteer ? 1 : 0, notes || null],
     );
     return { id: r.insertId };
   }
   const rows = JSON.parse(fs.readFileSync(LOCAL, 'utf8'));
-  const row = { id: rows.length + 1, name, email, phone, address, adults, kids, guests, volunteer: !!volunteer, notes: notes || null, created_at: new Date().toISOString() };
+  const row = { id: rows.length + 1, name, email, phone, address, adults, kids, guests, food_pref: foodPref || 'veg', volunteer: !!volunteer, notes: notes || null, created_at: new Date().toISOString() };
   rows.push(row);
   fs.writeFileSync(LOCAL, JSON.stringify(rows, null, 2));
   return { id: row.id };

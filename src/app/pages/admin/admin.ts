@@ -28,10 +28,10 @@ import { FormsModule } from '@angular/forms';
           <button class="btn btn-outline" (click)="download()">Download CSV</button>
         </div>
         <table class="admin-table">
-          <thead><tr><th>#</th><th>Registered</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Adults</th><th>Kids</th><th>Volunteer</th></tr></thead>
+          <thead><tr><th>#</th><th>Registered</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Adults</th><th>Kids</th><th>Food</th><th>Volunteer</th></tr></thead>
           <tbody>
             @for (r of rsvps(); track r.id; let i = $index) {
-              <tr><td>{{ i + 1 }}</td><td>{{ fmt(r.created_at) }}</td><td>{{ r.name }}</td><td>{{ r.email }}</td><td>{{ r.phone }}</td><td>{{ r.address }}</td><td>{{ r.adults }}</td><td>{{ r.kids }}</td><td>{{ r.volunteer ? 'Yes' : 'No' }}</td></tr>
+              <tr><td>{{ i + 1 }}</td><td>{{ fmt(r.created_at) }}</td><td>{{ r.name }}</td><td>{{ r.email }}</td><td>{{ r.phone }}</td><td>{{ r.address }}</td><td>{{ r.adults }}</td><td>{{ r.kids }}</td><td>{{ r.food_pref === 'nonveg' ? 'Non-veg' : 'Veg' }}</td><td>{{ r.volunteer ? 'Yes' : 'No' }}</td></tr>
             }
           </tbody>
         </table>
@@ -108,7 +108,7 @@ export class AdminPage {
   }
 
   download() {
-    const cols = ['id', 'created_at', 'name', 'phone', 'address', 'adults', 'kids', 'guests', 'volunteer', 'notes'];
+    const cols = ['id', 'created_at', 'name', 'phone', 'address', 'adults', 'kids', 'guests', 'food_pref', 'volunteer', 'notes'];
     const esc = (v: any) => `"${String(v ?? '').replace(/"/g, '""')}"`;
     const csv = [cols.join(','), ...this.rsvps().map(r => cols.map(c => esc(c === 'volunteer' ? (r.volunteer ? 'Yes' : 'No') : r[c])).join(','))].join('\r\n');
     const a = document.createElement('a');

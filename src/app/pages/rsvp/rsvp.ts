@@ -65,6 +65,13 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
           }
         </div>
       </div>
+      <div class="field">
+        <label>Food preference</label>
+        <div class="field-row">
+          <label class="check-label"><input type="radio" formControlName="foodPref" value="veg" /> Vegetarian</label>
+          <label class="check-label"><input type="radio" formControlName="foodPref" value="nonveg" /> Non-vegetarian</label>
+        </div>
+      </div>
       <div class="field check">
         <label class="check-label" for="volunteer">
           <input id="volunteer" type="checkbox" formControlName="volunteer" />
@@ -104,6 +111,7 @@ export class RsvpPage implements OnInit {
     address: ['', [Validators.required, Validators.maxLength(255)]],
     adults: [1, [Validators.required, Validators.min(1), Validators.max(50)]],
     kids: [0, [Validators.required, Validators.min(0), Validators.max(50)]],
+    foodPref: ['veg', Validators.required],
     volunteer: [false],
     notes: [''],
     website: [''],
@@ -152,7 +160,7 @@ export class RsvpPage implements OnInit {
     const v = this.form.value;
     const res = await this.data.rsvp({
       name: v.name!, email: v.email || 'diwali@kbar.fun', phone: v.phone!, address: v.address!,
-      adults: Number(v.adults), kids: Number(v.kids),
+      adults: Number(v.adults), kids: Number(v.kids), foodPref: v.foodPref!,
       volunteer: !!v.volunteer, notes: v.notes || '', website: v.website || '',
     });
     this.sending.set(false);

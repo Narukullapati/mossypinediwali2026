@@ -26,7 +26,7 @@ export class DataService {
   contact = () => get<Contact>('/api/contact');
   rsvpStats = () => get<RsvpStats>('/api/rsvp/stats');
 
-  async rsvp(body: { name: string; email: string; phone: string; address: string; adults: number; kids: number; volunteer: boolean; notes: string; website: string }): Promise<RsvpResult> {
+  async rsvp(body: { name: string; email: string; phone: string; address: string; adults: number; kids: number; foodPref: string; volunteer: boolean; notes: string; website: string }): Promise<RsvpResult> {
     const r = await fetch('/api/rsvp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
