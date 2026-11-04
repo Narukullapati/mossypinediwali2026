@@ -25,25 +25,6 @@ import { RangoliComponent } from '../../shared/rangoli';
   </div>
 </section>
 
-<section class="container">
-  <h2>A day of light, food &amp; family</h2>
-  <p class="muted">Three moments not to miss.</p>
-  <div class="card-grid" style="margin-top: var(--space-4)">
-    <div class="card">
-      <h3>Cultural &amp; kids' fun</h3>
-      <p>Dances, songs and skits by the children of Mossy Pine, plus games and activities for the whole family.</p>
-    </div>
-    <div class="card">
-      <h3>Community lunch</h3>
-      <p>A potluck feast made by Mossy Pine families — biryanis, chaat, sweets and endless chai.</p>
-    </div>
-    <div class="card">
-      <h3>Sparklers &amp; dance</h3>
-      <p>Family-safe sparklers in the courtyard, then Bollywood favourites and garba on the open floor.</p>
-    </div>
-  </div>
-</section>
-
   `,
 })
 export class HomePage implements OnInit {

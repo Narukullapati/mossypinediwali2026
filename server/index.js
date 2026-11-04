@@ -135,17 +135,12 @@ app.post('/api/register/food', async (req, res) => {
   const b = req.body || {};
   const s = (v, n) => (typeof v === 'string' ? v.trim().slice(0, n) : '');
   const address = s(b.address, 255), category = s(b.category, 120), dish = s(b.dish, 300);
-  const spice = s(b.spice, 20), qty = s(b.qty, 80), warming = s(b.warming, 60), spoons = s(b.spoons, 10);
-  const dietary = ['Vegetarian','Vegan','Jain (no onion/garlic)','Contains nuts','Contains dairy','Gluten-free','Halal']
-    .filter((d, i) => [b.veg, b.vegan, b.jain, b.nuts, b.dairy, b.glutenFree, b.halal][i]);
+  const qty = s(b.qty, 80);
   const errors = {};
   if (!address) errors.address = 'Required';
   if (!category) errors.category = 'Required';
   if (!dish) errors.dish = 'Required';
-  if (!spice) errors.spice = 'Required';
   if (!qty) errors.qty = 'Required';
-  if (!warming) errors.warming = 'Required';
-  if (!spoons) errors.spoons = 'Required';
   if (Object.keys(errors).length) return res.status(422).json({ ok: false, errors });
   const rsvp = await getRsvpByAddress(address);
   if (!rsvp) return res.status(422).json({ ok: false, errors: { address: 'Home address must match an existing RSVP.' } });
@@ -153,8 +148,7 @@ app.post('/api/register/food', async (req, res) => {
   if (closed.includes(category)) return res.status(422).json({ ok: false, errors: { category: 'This category is full — please pick another.' } });
   const details = [
     `Category: ${category}`, `Dish: ${dish}`,
-    `Dietary: ${dietary.length ? dietary.join(', ') : 'none'}`, `Spice: ${spice}`,
-    `Serves: ${qty}`, `Warming: ${warming}`, `Serving spoons: ${spoons}`, `Address: ${address}`,
+    `Serves: ${qty}`, `Address: ${address}`,
   ].join(' | ');
   try {
     const result = await saveRegistration({ type: 'food', name: rsvp.name, phone: rsvp.phone, details });

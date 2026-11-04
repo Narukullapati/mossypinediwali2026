@@ -478,3 +478,4 @@ input[type="checkbox"], input[type="radio"] { width: 24px; height: 24px; min-hei
   transform: translateX(-50%); border: 5px solid transparent; border-top-color: #000;
   z-index: 200; pointer-events: none;
 }
+.tabbar .tab-emoji { font-size: 1.35rem; line-height: 1; }

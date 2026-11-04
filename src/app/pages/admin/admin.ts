@@ -295,7 +295,7 @@ export class AdminPage implements AfterViewInit {
       const rows = t === 'cultural' ? this.cultural() : this.food();
       const keys = t === 'cultural'
         ? ['Team', 'Performers', 'Type', 'Choreographer', 'Duration', 'Email', 'Audio']
-        : ['Category', 'Dish', 'Dietary', 'Spice', 'Serves', 'Warming', 'Serving spoons', 'Address'];
+        : ['Category', 'Dish', 'Serves', 'Address'];
       const head = ['no', 'registered', 'name', 'phone', ...keys.map(k => k.toLowerCase().replace(/ /g, '_'))];
       csv = [head.join(','), ...rows.map((r, i) =>
         [i + 1, this.fmtCsv(r.created_at), r.name, r.phone,

@@ -117,39 +117,9 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
           @if (fbad('dish')) { <p class="error">Required</p> }
         </div>
         <div class="field">
-          <label>Dietary / allergy information</label>
-          <label class="opt"><input type="checkbox" formControlName="veg" /> Vegetarian</label>
-          <label class="opt"><input type="checkbox" formControlName="vegan" /> Vegan</label>
-          <label class="opt"><input type="checkbox" formControlName="jain" /> Jain (no onion/garlic)</label>
-          <label class="opt"><input type="checkbox" formControlName="nuts" /> Contains nuts / peanut allergy</label>
-          <label class="opt"><input type="checkbox" formControlName="dairy" /> Contains dairy</label>
-          <label class="opt"><input type="checkbox" formControlName="glutenFree" /> Gluten-free</label>
-          <label class="opt"><input type="checkbox" formControlName="halal" /> Halal</label>
-        </div>
-        <div class="field">
-          <label data-tip="How spicy is the dish?">Spice level <span class="req">*</span></label>
-          <label class="opt"><input type="radio" formControlName="spice" value="Mild" /> Mild</label>
-          <label class="opt"><input type="radio" formControlName="spice" value="Medium" /> Medium</label>
-          <label class="opt"><input type="radio" formControlName="spice" value="Spicy" /> Spicy</label>
-          @if (fbad('spice')) { <p class="error">Required</p> }
-        </div>
-        <div class="field">
           <label for="fqty" data-tip="e.g., Feeds 8-10 people">Estimated quantity / portions <span class="req">*</span></label>
           <input id="fqty" type="text" formControlName="qty" placeholder="e.g. Feeds 8-10 people" />
           @if (fbad('qty')) { <p class="error">Required</p> }
-        </div>
-        <div class="field">
-          <label data-tip="Needs reheating on-site?">Does your dish require warming on-site? <span class="req">*</span></label>
-          <label class="opt"><input type="radio" formControlName="warming" value="Yes - needs oven/microwave" /> Yes — needs oven/microwave</label>
-          <label class="opt"><input type="radio" formControlName="warming" value="Yes - bringing Instant Pot/Crockpot" /> Yes — bringing Instant Pot/Crockpot</label>
-          <label class="opt"><input type="radio" formControlName="warming" value="No - ready to serve" /> No — ready to serve</label>
-          @if (fbad('warming')) { <p class="error">Required</p> }
-        </div>
-        <div class="field">
-          <label data-tip="Bringing your own serving spoons?">Are you bringing your own serving spoons? <span class="req">*</span></label>
-          <label class="opt"><input type="radio" formControlName="spoons" value="Yes" /> Yes</label>
-          <label class="opt"><input type="radio" formControlName="spoons" value="No" /> No</label>
-          @if (fbad('spoons')) { <p class="error">Required</p> }
         </div>
         @if (serverError()) { <p class="error">{{ serverError() }}</p> }
         <button class="btn btn-gold" type="submit" [disabled]="sending()">{{ sending() ? 'Sending…' : 'Submit' }}</button>
@@ -188,12 +158,7 @@ export class RegisterPage implements OnInit {
     address: ['', Validators.required],
     category: ['', Validators.required],
     dish: ['', Validators.required],
-    veg: [false], vegan: [false], jain: [false], nuts: [false],
-    dairy: [false], glutenFree: [false], halal: [false],
-    spice: ['', Validators.required],
     qty: ['', Validators.required],
-    warming: ['', Validators.required],
-    spoons: ['', Validators.required],
   });
   private catHints: Record<string, string> = {
     'Appetizers / Snacks': 'Samosas, Pakoras, Chaat, Paneer Tikka',
@@ -272,7 +237,7 @@ export class RegisterPage implements OnInit {
       this.foodForm.markAllAsTouched();
       this.modalErrors.set(this.missing(this.foodForm, {
         address: 'Home address', category: 'Food category', dish: 'Dish name',
-        spice: 'Spice level', qty: 'Quantity/portions', warming: 'Warming on-site', spoons: 'Serving spoons',
+        qty: 'Quantity/portions',
       }));
       return;
     }
