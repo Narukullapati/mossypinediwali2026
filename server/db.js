@@ -45,7 +45,6 @@ async function initStore() {
       'ADD COLUMN kids INT',
       'ADD COLUMN address VARCHAR(255)',
       'ADD COLUMN volunteer TINYINT(1) NOT NULL DEFAULT 0',
-      'ADD UNIQUE KEY uq_rsvp_email (email)',
       'ADD UNIQUE KEY uq_rsvp_address (address)',
     ]) {
       try { await p.query(`ALTER TABLE rsvps ${col}`); } catch (e) { /* already there */ }
