@@ -3,7 +3,7 @@ services:
     build: .
     labels:
       - traefik.enable=true
-      - traefik.http.routers.diwali.rule=Host(`mydiwali.online`) || Host(`www.mydiwali.online`)
+      - traefik.http.routers.diwali.rule=Host(`kbar.fun`) || Host(`www.kbar.fun`) || Host(`mydiwali.online`) || Host(`www.mydiwali.online`)
       - traefik.http.routers.diwali.entrypoints=websecure
       - traefik.http.routers.diwali.tls=true
       - traefik.http.routers.diwali.tls.certresolver=letsencrypt
