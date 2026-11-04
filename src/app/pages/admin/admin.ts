@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
       <div class="reg-tabs big-tabs sug-tabs" role="tablist" aria-label="Admin data">
         <a role="tab" [class.on]="tab() === 'rsvp'" (click)="tab.set('rsvp')" style="cursor:pointer">RSVP ({{ rsvps().length }})</a>
         <a role="tab" [class.on]="tab() === 'cultural'" (click)="tab.set('cultural')" style="cursor:pointer">Cultural ({{ cultural().length }})</a>
-        <a role="tab" [class.on]="tab() === 'food'" (click)="tab.set('food')" style="cursor:pointer">Food ({{ food().length }})</a>
+        @if (false) { <a role="tab" [class.on]="tab() === 'food'" (click)="tab.set('food')" style="cursor:pointer">Food ({{ food().length }})</a> }
         <a role="tab" [class.on]="tab() === 'settings'" (click)="tab.set('settings')" style="cursor:pointer">Categories</a>
         @if (tab() !== 'settings') {
           <button class="dl-xls" type="button" (click)="download()" title="Download Excel" aria-label="Download Excel">
