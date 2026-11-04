@@ -31,14 +31,6 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
           <p class="error" id="name-err">{{ err('name', 'Please tell us your name.') }}</p>
         }
       </div>
-      <div class="field" hidden>
-        <label for="email">Email</label>
-        <input id="email" type="email" formControlName="email" autocomplete="email"
-          [attr.aria-invalid]="touched('email') && form.controls.email.invalid" aria-describedby="email-err" />
-        @if (touched('email') && form.controls.email.invalid) {
-          <p class="error" id="email-err">{{ err('email', 'Please enter a valid email address.') }}</p>
-        }
-      </div>
       <div class="field">
         <label for="phone">Phone number</label>
         <input id="phone" type="tel" formControlName="phone" autocomplete="tel"
@@ -116,7 +108,7 @@ export class RsvpPage implements OnInit {
   private data = inject(DataService);
   form = this.fb.group({
     name: ['', [Validators.required, Validators.maxLength(120)]],
-    email: ['', [Validators.email, Validators.maxLength(190)]],
+    email: [''],
     phone: ['', [Validators.required, Validators.pattern(/^[+()\-.\s\d]{7,20}$/)]],
     address: ['', [Validators.required, Validators.maxLength(255)]],
     adults: [1, [Validators.required, Validators.min(1), Validators.max(50)]],
