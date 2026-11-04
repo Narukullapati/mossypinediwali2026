@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { initStore, existingRsvp, saveRsvp, saveRegistration, listRsvps, listRegistrations, rsvpStats } = require('./db');
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'mossypine';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '4466';
 const adminOnly = (req, res, next) =>
   req.headers['x-admin-password'] === ADMIN_PASSWORD
     ? next()

@@ -15,7 +15,7 @@ services:
       DB_NAME: ${DB_NAME:-diwali}
       DB_USER: ${DB_USER:-diwali}
       DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env or the environment}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-mossypine}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-4466}
     depends_on:
       db:
         condition: service_healthy
