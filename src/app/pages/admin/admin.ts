@@ -100,7 +100,7 @@ export class AdminPage {
   download() {
     const cols = ['id', 'created_at', 'name', 'phone', 'address', 'adults', 'kids', 'guests', 'volunteer', 'notes'];
     const esc = (v: any) => `"${String(v ?? '').replace(/"/g, '""')}"`;
-    const csv = [cols.join(','), ...this.rsvps().map(r => cols.map(c => esc(r[c])).join(','))].join('\r\n');
+    const csv = [cols.join(','), ...this.rsvps().map(r => cols.map(c => esc(c === 'volunteer' ? (r.volunteer ? 'Yes' : 'No') : r[c])).join(','))].join('\r\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
     a.download = 'rsvps.csv';
