@@ -6,11 +6,11 @@
 
 :root {
   /* colour */
-  --color-base: #F3BEE1;      --color-text: #4A0730;      --color-surface: #FBD9F0;
-  --color-muted: #8F3E6E;     --color-primary: #C98A0B;   --color-accent-1: #E0661A;
-  --color-accent-2: #D93B7A;  --color-link: #A3175A;      --color-band: #B8156A;
-  --color-band-warm: #D93B7A; --color-focus: #1A7FB8;     --color-focus-alt: #FFFFFF;
-  --color-error: #A3175A;
+  --color-base: #7A0E44;      --color-text: #FFF3DC;      --color-surface: #8E1457;
+  --color-muted: #F2A3C7;     --color-primary: #F5B841;   --color-accent-1: #FF8A1E;
+  --color-accent-2: #E84E8A;  --color-link: #FFD9EA;      --color-band: #B8156A;
+  --color-band-warm: #E84E8A; --color-focus: #8FE3FF;     --color-focus-alt: #7A0E44;
+  --color-error: #FFD9EA;
   /* type */
   --font-display: 'Yatra One', 'Georgia', serif;
   --font-body: 'Mukta', 'Segoe UI', 'Helvetica Neue', sans-serif;
@@ -44,7 +44,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #F9E3F5 0%, #F2BCE4 34%, #E893C8 67%, #DB6CAB 100%) fixed;
+  background: linear-gradient(180deg, #5A0932 0%, #7A0E44 45%, #B8156A 100%) fixed;
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: var(--text-body);
@@ -84,7 +84,7 @@ img { height: auto; }
 
 .skip-link {
   position: absolute; left: var(--space-2); top: -64px;
-  background: var(--color-primary); color: var(--color-text);
+  background: var(--color-primary); color: var(--color-base);
   padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm);
   font-weight: 700; z-index: 100; text-decoration: none;
 }
@@ -98,7 +98,7 @@ section { padding-block: var(--space-4); }
 /* ---------- header ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(243,190,225,.97);
+  background: rgba(122,14,68,.96);
   border-bottom: 2px solid var(--color-primary);
 }
 .header-main {
@@ -142,11 +142,11 @@ nav a.active {
   box-shadow: inset 0 -3px 0 var(--color-primary);
 }
 nav a.nav-cta {
-  background: var(--color-primary); color: var(--color-text);
+  background: var(--color-primary); color: var(--color-base);
   border-radius: var(--radius-pill); font-weight: 700; padding-inline: var(--space-3);
   box-shadow: none;
 }
-nav a.nav-cta:hover { background: var(--color-link); color: var(--color-text); }
+nav a.nav-cta:hover { background: var(--color-link); color: var(--color-base); }
 
 /* ---------- buttons & chips ---------- */
 .btn {
@@ -155,8 +155,8 @@ nav a.nav-cta:hover { background: var(--color-link); color: var(--color-text); }
   border-radius: var(--radius-pill); font-weight: 700; font-size: var(--text-body);
   text-decoration: none; cursor: pointer; border: var(--border);
 }
-.btn-gold { background: var(--color-primary); color: var(--color-text); }
-.btn-gold:hover { background: var(--color-link); color: var(--color-text); }
+.btn-gold { background: var(--color-primary); color: var(--color-base); }
+.btn-gold:hover { background: var(--color-link); color: var(--color-base); }
 .btn-outline { background: transparent; color: var(--color-primary); }
 .btn-outline:hover { background: var(--color-surface); color: var(--color-link); }
 
@@ -247,7 +247,7 @@ label { display: block; font-weight: 600; margin-bottom: var(--space-half); }
 .field-row .field { flex: 1; min-width: 0; }
 input, select, textarea {
   width: 100%; min-height: var(--target-min); padding: var(--space-1) var(--space-2);
-  background: #FFF9EC; color: var(--color-text);
+  background: #FFF9EC; color: var(--color-base);
   border: 2px solid var(--color-primary); border-radius: var(--radius-sm);
   font: inherit;
 }
@@ -315,7 +315,7 @@ input[type="checkbox"], input[type="radio"] { width: 24px; height: 24px; min-hei
   border: 2px solid var(--color-primary); border-bottom: none;
   border-radius: 12px 12px 0 0;
 }
-.reg-tabs a.on { background: var(--color-primary); color: var(--color-text); font-weight: 700; }
+.reg-tabs a.on { background: var(--color-primary); color: var(--color-base); font-weight: 700; }
 .reg-tabs a:hover { color: var(--color-link); }
 
 .hl { color: var(--color-primary); font-weight: 700; }
