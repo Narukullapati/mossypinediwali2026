@@ -18,8 +18,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
   @if (done()) {
     <div class="card form-success">
       <p class="big">See you there!</p>
-      <p>Thanks, {{ name() }} — your RSVP is in.
-        @if (stats(); as s) { You're one of {{ s.guests }} guests coming so far. }</p>
+      <p>Thanks, {{ name() }} — your RSVP is in.</p>
       <p class="muted">Details: Saturday, November 21, 2026 · 11:00 AM – 4:00 PM · K-Bar Amenity Center, Tampa</p>
     </div>
   } @else {
