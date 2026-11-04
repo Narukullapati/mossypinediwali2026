@@ -1,10 +1,9 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DataService, RsvpStats } from '../../data.service';
-import { RegTabsComponent } from '../../shared/reg-tabs';
 @Component({
   selector: 'app-rsvp',
-  imports: [ReactiveFormsModule, RegTabsComponent],
+  imports: [ReactiveFormsModule],
   template: `
 <div class="rsvp">
 <section class="container hero">
@@ -44,7 +43,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
           placeholder="House no, street — helps us map the neighbourhood"
           [attr.aria-invalid]="touched('address') && form.controls.address.invalid" aria-describedby="address-err" />
         @if (touched('address') && form.controls.address.invalid) {
-          <p class="error" id="address-err">{{ err('address', 'Please add your house address.') }}</p>
+          <p class="error" id="address-err">{{ err('address', 'Start with your house number (e.g., 19273 Mossy Pine Drive).') }}</p>
         }
       </div>
       <div class="field-row">
@@ -112,7 +111,7 @@ export class RsvpPage implements OnInit {
     name: ['', [Validators.required, Validators.maxLength(120)]],
     email: [''],
     phone: ['', [Validators.required, Validators.pattern(/^[+()\-.\s\d]{7,20}$/)]],
-    address: ['', [Validators.required, Validators.maxLength(255)]],
+    address: ['', [Validators.required, Validators.maxLength(255), Validators.pattern(/^\d/)]],
     adults: [1, [Validators.required, Validators.min(1), Validators.max(50)]],
     kids: [0, [Validators.required, Validators.min(0), Validators.max(50)]],
     vegCount: [0, [Validators.min(0), Validators.max(50)]],

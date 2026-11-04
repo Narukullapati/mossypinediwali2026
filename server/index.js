@@ -64,6 +64,7 @@ app.post('/api/rsvp', async (req, res) => {
   if (!name || name.length > 120) errors.name = 'Please tell us your name.';
   if (!name) errors.name = 'Please tell us your name.';  if (!phone || !/^[+()\-.\s\d]{7,20}$/.test(phone)) errors.phone = 'Please enter a valid phone number.';
   if (!address) errors.address = 'Please add your house address.';
+  else if (!/^\d/.test(address)) errors.address = 'Please start the address with your house number.';
   if (!Number.isInteger(adults) || adults < 1 || adults > 50)
     errors.adults = 'Adults must be between 1 and 50.';
   if (!Number.isInteger(kids) || kids < 0 || kids > 50)
