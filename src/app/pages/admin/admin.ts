@@ -116,7 +116,7 @@ import { FormsModule } from '@angular/forms';
   styles: `.admin-section{max-width:1600px}
   .sug-card{padding:0!important;overflow:hidden;border:1px solid #E5EAF2!important;box-shadow:0 2px 8px rgba(30,50,80,.06)!important;display:flex;flex-direction:column;min-height:320px;border-radius:10px}
   .excel-body{flex:1;overflow:auto;min-height:0;background:#fff}
-  @media(max-width:768px){.excel-body{height:58vh;flex:none}}
+  @media(max-width:768px){.excel-body{height:62vh;flex:none}.cat-toggle{padding:6px 10px;font-size:.85rem}}
   .admin-grid{overflow-x:hidden}
   .sug-tabs{flex-shrink:0;background:transparent;padding:8px 10px 0;flex-wrap:nowrap;justify-content:flex-start;align-items:flex-end;gap:4px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid #E5EAF2}
   .sug-tabs::-webkit-scrollbar{display:none}
@@ -149,7 +149,7 @@ import { FormsModule } from '@angular/forms';
   .cat-row td{background:#FDF0F7!important;font-weight:700;color:var(--color-primary);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
   .dish-pill{display:inline-block;background:#FDF0F7;color:var(--color-primary);border:1px solid var(--color-primary);border-radius:999px;padding:2px 10px;font-weight:700;font-size:.75rem;margin-right:6px;white-space:nowrap}
   .cat-settings{display:flex;flex-direction:column;gap:8px;max-width:480px}
-  .cat-toggle{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid #E5E7EB;border-radius:8px;cursor:pointer;font-size:.9rem}
+  .cat-toggle{display:flex;align-items:center;gap:10px;padding:7px 12px;border:1px solid #E5E7EB;border-radius:8px;cursor:pointer;font-size:.9rem}
   .cat-toggle input{width:18px;height:18px;accent-color:var(--color-primary)}
   .cat-toggle.closed{border-color:var(--color-primary);background:#FDF0F7}
   .full-tag{margin-left:auto;background:var(--color-primary);color:#fff;border-radius:999px;padding:1px 10px;font-size:.7rem;font-weight:700}
