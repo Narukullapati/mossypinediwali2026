@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     <div class="card admin-grid">
       @if (tab() === 'rsvp') {
         <div class="grid-head">
-          <h3>RSVPs — {{ totalGuests() }} guests</h3>
+          <h3>RSVPs — {{ totalGuests() }} guests · 🟢{{ totalVeg() }} veg · 🔴{{ totalNonveg() }} non-veg</h3>
           <button class="btn btn-outline" (click)="download()">Download CSV</button>
         </div>
         <table class="admin-table">
@@ -95,6 +95,8 @@ export class AdminPage {
 
   fmt(d: string) { return d ? new Date(d).toLocaleString() : ''; }
   totalGuests() { return this.rsvps().reduce((n, r) => n + (r.guests || 0), 0); }
+  totalVeg() { return this.rsvps().reduce((n, r) => n + (r.veg_count || 0), 0); }
+  totalNonveg() { return this.rsvps().reduce((n, r) => n + (r.nonveg_count || 0), 0); }
 
   async login() {
     this.err.set('');
