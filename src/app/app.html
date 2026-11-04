@@ -14,7 +14,7 @@
   <nav id="main-nav" [class.open]="menuOpen" aria-label="Main">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuOpen = false">Home</a>
     <a routerLink="/cultural" routerLinkActive="active" (click)="menuOpen = false">Cultural activity</a>
-    <a routerLink="/food" routerLinkActive="active" (click)="menuOpen = false">Food</a>
+    @if (false) { <a routerLink="/food" routerLinkActive="active" (click)="menuOpen = false">Food</a> }
     <a routerLink="/contact" routerLinkActive="active" (click)="menuOpen = false">Contact</a>
     <a routerLink="/admin" routerLinkActive="active" (click)="menuOpen = false">Admin</a>
     <a class="nav-cta" routerLink="/rsvp" routerLinkActive="active" (click)="menuOpen = false">RSVP</a>
@@ -30,9 +30,11 @@
   <a routerLink="/cultural" routerLinkActive="active" aria-label="Cultural activity" data-tip="Cultural Activity">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="1.8"/><path d="M13 6.5c1.5-1 3-1.2 4.5-.5"/><path d="M13 6.5L9.5 12l4 2.5-1 5.5"/><path d="M9.5 12c-1.8-.5-3.5 0-5 1.5"/><path d="M13.5 14.5l4.5 4"/></svg><span>Cultural</span>
   </a>
+  @if (false) {
   <a routerLink="/food" routerLinkActive="active" aria-label="Food" data-tip="Food Registration">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16a8 8 0 0 1-16 0z"/><path d="M9 21h6"/><path d="M15 4l5 5"/><path d="M18 3l4 4"/></svg><span>Food</span>
   </a>
+  }
   <a routerLink="/admin" routerLinkActive="active" aria-label="Admin" data-tip="Admin">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Admin</span>
   </a>

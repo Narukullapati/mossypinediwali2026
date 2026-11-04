@@ -79,7 +79,7 @@ import { RegTabsComponent } from '../../shared/reg-tabs';
       <div class="field check">
         <label class="check-label" for="volunteer" data-tip="Check if you can help at the event">
           <input id="volunteer" type="checkbox" formControlName="volunteer" />
-          I'd like to volunteer / help the organizers
+          I'd like to volunteer
         </label>
       </div>
       <div class="hp" aria-hidden="true">
