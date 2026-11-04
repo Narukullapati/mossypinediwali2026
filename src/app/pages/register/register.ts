@@ -2,7 +2,6 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegTabsComponent } from '../../shared/reg-tabs';
-
 const COPY: Record<string, { eyebrow: string; title: string; lede: string; label: string; placeholder: string; done: string }> = {
   cultural: {
     eyebrow: 'Perform on stage',
@@ -26,7 +25,6 @@ const COPY: Record<string, { eyebrow: string; title: string; lede: string; label
   selector: 'app-register',
   imports: [ReactiveFormsModule, RegTabsComponent],
   template: `
-<app-reg-tabs />
 <section class="container hero">
   <p class="eyebrow">{{ c.eyebrow }}</p>
   <h1 class="glow">{{ c.title }}</h1>

@@ -2,13 +2,11 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DataService, RsvpStats } from '../../data.service';
 import { RegTabsComponent } from '../../shared/reg-tabs';
-
 @Component({
   selector: 'app-rsvp',
   imports: [ReactiveFormsModule, RegTabsComponent],
   template: `
 <div class="rsvp">
-<app-reg-tabs />
 <section class="container hero">
   <p class="eyebrow">Save your spot</p>
   <h1 class="glow">RSVP for Diwali</h1>
