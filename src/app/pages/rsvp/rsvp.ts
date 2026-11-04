@@ -152,7 +152,7 @@ export class RsvpPage implements OnInit {
     this.sending.set(true);
     const v = this.form.value;
     const res = await this.data.rsvp({
-      name: v.name!, email: v.email!, phone: v.phone!, address: v.address!,
+      name: v.name!, email: v.email || 'diwali@kbar.fun', phone: v.phone!, address: v.address!,
       adults: Number(v.adults), kids: Number(v.kids),
       volunteer: !!v.volunteer, notes: v.notes || '', website: v.website || '',
     });

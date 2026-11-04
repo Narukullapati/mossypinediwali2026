@@ -70,14 +70,14 @@ async function existingRsvp(email, address) {
   const p = getPool();
   if (p) {
     const [[row]] = await p.query(
-      'SELECT SUM(LOWER(email)=? AND email<>\'\') AS email_dup, SUM(LOWER(address)=?) AS address_dup FROM rsvps',
+      'SELECT SUM(LOWER(email)=? AND email<>\'\' AND email<>\'diwali@kbar.fun\') AS email_dup, SUM(LOWER(address)=?) AS address_dup FROM rsvps',
       [el, al],
     );
     return { email: Number(row.email_dup) > 0, address: Number(row.address_dup) > 0 };
   }
   const rows = JSON.parse(fs.readFileSync(LOCAL, 'utf8'));
   return {
-    email: el !== '' && rows.some(r => (r.email || '').toLowerCase() === el),
+    email: el !== '' && el !== 'diwali@kbar.fun' && rows.some(r => (r.email || '').toLowerCase() === el),
     address: rows.some(r => r.address && r.address.toLowerCase() === al),
   };
 }
