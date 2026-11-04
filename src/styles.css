@@ -44,7 +44,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 
 body {
   margin: 0;
-  background: var(--color-base);
+  background: linear-gradient(180deg, #5A0932 0%, #7A0E44 45%, #B8156A 100%) fixed;
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: var(--text-body);
