@@ -315,7 +315,7 @@ input[type="checkbox"] { width: 24px; height: 24px; min-height: auto; accent-col
   border: 2px solid var(--color-primary); border-bottom: none;
   border-radius: 12px 12px 0 0;
 }
-.reg-tabs a.on { background: var(--color-surface); color: var(--color-primary); }
+.reg-tabs a.on { background: var(--color-primary); color: var(--color-base); font-weight: 700; }
 .reg-tabs a:hover { color: var(--color-link); }
 
 .hl { color: var(--color-primary); font-weight: 700; }
