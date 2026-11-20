@@ -1,5 +1,12 @@
 node_modules/
 dist/
-server/data/rsvps.local.json
+.angular/
+server/data/rsvps.local*.json
+server/data/settings.local.json
+server/uploads/
 .env
 *.log
+nul
+
+deploy-prod/
+.devin/*.ps1

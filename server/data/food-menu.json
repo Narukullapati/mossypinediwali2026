@@ -1,0 +1,91 @@
+{
+  "categories": [
+    {
+      "title": "1. Appetizers & Starters",
+      "badge": "11 Varieties",
+      "img": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80",
+      "items": [
+        { "id": "vegAppetizer", "name": "Veg Appetizers", "qty": "½ Tray each", "slots": 11, "veg": true, "needsName": true, "sub": "11 Half-Tray Veg Starters" }
+      ]
+    },
+    {
+      "title": "2. Main Course — Curries",
+      "badge": "Signature Entrées",
+      "img": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80",
+      "items": [
+        { "id": "paneerCurry", "name": "Paneer Curry", "qty": "½ Tray each", "slots": 2, "veg": true, "slotLabel": "Tray", "slotTag": "½ Tray" },
+        { "id": "vegKurma", "name": "Veg Kurma", "qty": "Full Tray", "slots": 1, "veg": true },
+        { "id": "vegCurry", "name": "Veg Curry", "qty": "¾th Tray each", "slots": 3, "veg": true, "slotLabel": "Tray", "slotTag": "¾th Tray" }
+      ]
+    },
+    {
+      "title": "3. Biryanis & Rice Specialties",
+      "badge": "Dum Handi",
+      "img": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80",
+      "note": "Curd Rice is a combo with Trash Bags (30 Count) under Tableware & Supplies — picking one selects both.",
+      "items": [
+        { "id": "vegBiryani", "name": "Veg Biryani + Raita", "qty": "Full Tray each", "slots": 2, "veg": true, "needsName": true },
+        { "id": "curdRice", "name": "Curd Rice", "qty": "¾th Tray", "slots": 1, "veg": true },
+        { "id": "vegFriedRice", "name": "Veg Fried Rice", "qty": "Full Tray", "slots": 1, "veg": true }
+      ]
+    },
+    {
+      "title": "4. Indo-Chinese & Continental Mains",
+      "badge": "Crowd Favorites",
+      "img": "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80",
+      "items": [
+        { "id": "noodles", "name": "Noodles", "qty": "¾th Tray", "slots": 1, "dot": "gold" },
+        { "id": "pasta", "name": "Pasta", "qty": "¾th Tray", "slots": 1, "dot": "gold" }
+      ]
+    },
+    {
+      "title": "5. Breads & Accompaniments",
+      "badge": "Freshly Made",
+      "img": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=80",
+      "note": "Each set is a combo: 80 chapatis + 3 cases of water bottles (40 per case) — picking a set auto-selects its Water Bottles entry under Beverages.",
+      "items": [
+        { "id": "chapathi", "name": "Chapati & Water Combo", "qty": "2 Sets", "slots": 2, "veg": true, "slotLabel": "Chapati + Water Set", "slotTag": "80 Count & 3 Cases" }
+      ]
+    },
+    {
+      "title": "6. Sweet Finale & Desserts",
+      "badge": "Sweet Finale",
+      "img": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=80",
+      "items": [
+        { "id": "gulabJamoon1", "name": "Gulab Jamoon (100 Pieces) — Set 1", "qty": "100 Pieces", "slots": 1 },
+        { "id": "gulabJamoon2", "name": "Gulab Jamoon (100 Pieces) — Set 2", "qty": "100 Pieces", "slots": 1 },
+        { "id": "fruitCustard", "name": "Fruit Custard", "qty": "1 Full Tray", "slots": 1 },
+        { "id": "iceCream", "name": "Ice Cream", "qty": "3 Boxes and Vanilla Big Can (60–65 Count)", "slots": 1, "sub": "Classic Banquet Selection" }
+      ]
+    },
+    {
+      "title": "7. Beverages & Supplies",
+      "badge": "Hot & Cold",
+      "img": "https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?auto=format&fit=crop&w=800&q=80",
+      "note": "Combo: Cold Drinks Case 1 + Bowls + Napkins go together — picking one selects the rest.",
+      "items": [
+        { "id": "waterCase1", "name": "Water Bottles — Set 1 (3 Cases, 40 each)", "slots": 1 },
+        { "id": "waterCase2", "name": "Water Bottles — Set 2 (3 Cases, 40 each)", "slots": 1 },
+        { "id": "coldDrinks2Cases", "name": "Cold Drinks (2 Cases, 70 Cans)", "slots": 1 },
+        { "id": "coldDrinksCase3", "name": "Cold Drinks — Case 1 (35 Cans)", "slots": 1 }
+      ]
+    },
+    {
+      "title": "8. Tableware & Supplies",
+      "badge": "Guest Essentials",
+      "img": "https://images.unsplash.com/photo-1603199506016-b9a594b593c0?auto=format&fit=crop&w=800&q=80",
+      "note": "Make sure your supplies cover {guests} family guests. Paper Plates + Spoons and Curd Rice + Trash Bags are combos — picking one selects both. Cleanup Set: Sandwich Ziplocks + Table Covers + Cleaning Wipes + Paper Cups go together — picking one selects all four.",
+      "items": [
+        { "id": "paperPlates", "name": "Paper Plates (250 Count)", "slots": 1 },
+        { "id": "spoons", "name": "Spoons (500 Count)", "slots": 1 },
+        { "id": "bowls", "name": "Bowls (150 Count)", "slots": 1 },
+        { "id": "napkins", "name": "Napkins (1 Pack) - 300 Count", "slots": 1 },
+        { "id": "trashBags", "name": "Trash Bags (30 Count)", "slots": 1 },
+        { "id": "sandwichZiploc", "name": "Sandwich Ziplocks (150 Count)", "slots": 1 },
+        { "id": "tableCovers", "name": "Table Covers (5 Count)", "slots": 1 },
+        { "id": "cleaningWipes", "name": "Cleaning Wipes (1 Pack)", "slots": 1 },
+        { "id": "paperCups", "name": "Paper Cups (100 Count)", "slots": 1 }
+      ]
+    }
+  ]
+}

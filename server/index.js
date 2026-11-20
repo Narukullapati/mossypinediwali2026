@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
-const { initStore, existingRsvp, saveRsvp, saveRegistration, listRsvps, listRegistrations, rsvpStats, suggestAddresses, getRsvpByAddress, getSetting, setSetting } = require('./db');
+const { initStore, existingRsvp, saveRsvp, saveRegistration, updateRegistration, deleteRegistration, deleteRsvp, listRsvps, listRegistrations, rsvpStats, suggestAddresses, getRsvpByAddress, getSetting, setSetting } = require('./db');
 
 const UPLOAD_DIR = path.join(__dirname, 'uploads');
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
@@ -75,7 +75,29 @@ app.post('/api/rsvp', async (req, res) => {
     if (dup.email) errors.email = 'An RSVP already exists for this email.';
     if (dup.address) errors.address = 'An RSVP already exists for this address.';
     if (Object.keys(errors).length) return res.status(422).json({ ok: false, errors });
+    const itemPicks = new Map();
+    for (const x of (Array.isArray(b.items) ? b.items : []).slice(0, 30)) {
+      const id = String(typeof x === 'object' && x ? x.item : x).slice(0, 60);
+      if (!itemPicks.has(id)) itemPicks.set(id, typeof x === 'object' && x ? String(x.dish || '').trim().slice(0, 120) : '');
+    }
+    const wanted = menuItems.filter(i => itemPicks.has(i.id));
+    const noDish = wanted.filter(i => i.needsName && !itemPicks.get(i.id));
+    if (noDish.length)
+      return res.status(422).json({ ok: false, errors: { items: `Enter the dish name for ${noDish.map(i => `"${i.name}"`).join(', ')}.` } });
+    if (wanted.length) {
+      const foodRegs = (await listRegistrations()).filter(r => r.type === 'food');
+      const full = wanted.filter(it => (it.taken || []).length + foodRegs.filter(r => (r.details || '').includes(`Item: ${it.id}`)).length >= it.slots);
+      if (full.length)
+        return res.status(422).json({ ok: false, errors: { items: `"${full.map(i => i.name).join('", "')}" ${full.length > 1 ? 'are' : 'is'} already filled — please uncheck and resubmit.` } });
+    }
     const result = await saveRsvp({ name, email, phone, address, adults, kids, guests, vegCount, nonvegCount, foodPref, volunteer, notes });
+    for (const it of wanted) {
+      const details = [
+        `Category: ${it.category}`, `Item: ${it.id}`, `Dish: ${itemPicks.get(it.id) || it.name}`,
+        it.qty ? `Qty: ${it.qty}` : null, `Address: ${address}`,
+      ].filter(Boolean).join(' | ');
+      await saveRegistration({ type: 'food', name, phone, details });
+    }
     res.status(201).json({ ok: true, ...result });
   } catch (e) {
     res.status(500).json({ ok: false, error: 'Could not save your RSVP — please try again.' });
@@ -159,6 +181,99 @@ app.post('/api/register/food', async (req, res) => {
   }
 });
 
+const foodMenu = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'food-menu.json'), 'utf8'));
+const menuItems = foodMenu.categories.flatMap(c => c.items.map(i => ({ ...i, category: c.title })));
+
+async function foodMenuState() {
+  const regs = (await listRegistrations()).filter(r => r.type === 'food');
+  let guestTarget = '100 – 120';
+  try { const g = (await rsvpStats()).guests; guestTarget = `${g + 15} – ${g + 25}`; } catch { /* fallback text */ }
+  return {
+    categories: foodMenu.categories.map(c => ({
+      ...c,
+      note: c.note ? c.note.replaceAll('{guests}', guestTarget) : c.note,
+      items: c.items.map(item => {
+        const claims = regs.filter(r => (r.details || '').includes(`Item: ${item.id}`));
+        const taken = new Array(item.slots).fill(null);
+        (item.taken || []).forEach((n, i) => { if (i < item.slots) taken[i] = n; });
+        for (const r of claims) {
+          const dm = /Dish: ([^|]+)/.exec(r.details || '');
+          const sm = /Slot: (\d+)/.exec(r.details || '');
+          const dish = dm ? dm[1].trim() : '';
+          const label = dish && dish !== item.name ? dish : 'Item selected';
+          let idx = sm ? +sm[1] : -1;
+          if (idx < 0 || idx >= item.slots || taken[idx]) idx = taken.findIndex(t => !t);
+          if (idx >= 0) taken[idx] = label;
+        }
+        return { ...item, taken, remaining: Math.max(0, item.slots - taken.filter(Boolean).length) };
+      }),
+    })),
+  };
+}
+
+app.get('/api/food-menu', async (req, res) => {
+  try { res.json(await foodMenuState()); }
+  catch { res.status(500).json({ categories: [] }); }
+});
+
+app.post('/api/food-menu/claim', async (req, res) => {
+  const b = req.body || {};
+  const s = (v, n) => (typeof v === 'string' ? v.trim().slice(0, n) : '');
+  const picks = new Map();
+  const rawItems = Array.isArray(b.items) ? b.items : (b.item ? [b.item] : []);
+  for (const x of rawItems.slice(0, 60)) {
+    const id = String(typeof x === 'object' && x ? x.item : x).slice(0, 60);
+    const dish = typeof x === 'object' && x ? s(x.dish, 120) : '';
+    const slot = typeof x === 'object' && x ? Number.parseInt(String(x.slot), 10) : NaN;
+    if (!picks.has(id)) picks.set(id, []);
+    picks.get(id).push({ dish, slot: Number.isInteger(slot) && slot >= 0 ? slot : null });
+  }
+  const address = s(b.address, 255);
+  const wanted = menuItems.filter(i => picks.has(i.id));
+  const errors = {};
+  if (!wanted.length) errors.items = 'Pick at least one item from the menu.';
+  if (!address) errors.address = 'Required';
+  const noDish = wanted.filter(i => i.needsName && picks.get(i.id).some(p => !p.dish));
+  if (noDish.length) errors.items = `Enter the dish name for ${noDish.map(i => `"${i.name}"`).join(', ')}.`;
+  if (Object.keys(errors).length) return res.status(422).json({ ok: false, errors });
+  const rsvp = await getRsvpByAddress(address);
+  if (!rsvp) return res.status(422).json({ ok: false, errors: { address: 'Home address must match an existing RSVP.' } });
+  const foodRegs = (await listRegistrations()).filter(r => r.type === 'food');
+  const claimed = [], failed = [];
+  for (const item of wanted) {
+    const entries = picks.get(item.id);
+    let got = 0;
+    while (got < entries.length) {
+      const regs = foodRegs.filter(r => (r.details || '').includes(`Item: ${item.id}`));
+      const used = new Set();
+      for (let i = 0; i < Math.min((item.taken || []).length, item.slots); i++) used.add(i);
+      for (const r of regs) {
+        const sm = /Slot: (\d+)/.exec(r.details || '');
+        if (sm && +sm[1] < item.slots) used.add(+sm[1]);
+        else { let i = 0; while (used.has(i)) i++; used.add(i); }
+      }
+      if (used.size >= item.slots) break;
+      const want = entries[got];
+      let idx = want.slot != null && want.slot < item.slots && !used.has(want.slot) ? want.slot : -1;
+      if (idx < 0) { idx = 0; while (used.has(idx)) idx++; }
+      const details = [
+        `Category: ${item.category}`, `Item: ${item.id}`, `Dish: ${want.dish || item.name}`,
+        item.qty ? `Qty: ${item.qty}` : null, `Address: ${address}`, `Slot: ${idx}`,
+      ].filter(Boolean).join(' | ');
+      try {
+        await saveRegistration({ type: 'food', name: rsvp.name, phone: rsvp.phone, details });
+        foodRegs.push({ details });
+        got++;
+      } catch { break; }
+    }
+    if (got) claimed.push(item.name + (got > 1 ? ` ×${got}` : ''));
+    if (got < entries.length) failed.push(item.name + (entries.length - got > 1 ? ` ×${entries.length - got}` : ''));
+  }
+  if (!claimed.length)
+    return res.status(409).json({ ok: false, error: `${failed.join(', ')} — already filled.` });
+  res.status(201).json({ ok: true, name: rsvp.name, claimed, failed });
+});
+
 app.get('/api/closed-categories', async (req, res) => {
   try { res.json({ closed: (await getSetting('closedCategories')) || [] }); }
   catch { res.status(500).json({ closed: [] }); }
@@ -183,6 +298,26 @@ app.get('/api/admin/rsvps', adminOnly, async (req, res) => {
 });
 app.get('/api/admin/registrations', adminOnly, async (req, res) => {
   try { res.json(await listRegistrations()); } catch { res.status(500).json({ error: 'unavailable' }); }
+});
+app.patch('/api/admin/registrations/:id', adminOnly, async (req, res) => {
+  try {
+    const b = req.body || {};
+    const s = (v, n) => (typeof v === 'string' ? v.trim().slice(0, n) : '');
+    const ok = await updateRegistration(req.params.id, { name: s(b.name, 120), phone: s(b.phone, 20), details: s(b.details, 500) });
+    res.status(ok ? 200 : 404).json({ ok });
+  } catch { res.status(500).json({ error: 'unavailable' }); }
+});
+app.delete('/api/admin/registrations/:id', adminOnly, async (req, res) => {
+  try {
+    const ok = await deleteRegistration(req.params.id);
+    res.status(ok ? 200 : 404).json({ ok });
+  } catch { res.status(500).json({ error: 'unavailable' }); }
+});
+app.delete('/api/admin/rsvps/:id', adminOnly, async (req, res) => {
+  try {
+    const ok = await deleteRsvp(req.params.id);
+    res.status(ok ? 200 : 404).json({ ok });
+  } catch { res.status(500).json({ error: 'unavailable' }); }
 });
 
 app.use(express.static(DIST, { index: 'index.html', maxAge: '1h' }));

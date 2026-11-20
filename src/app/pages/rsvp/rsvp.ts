@@ -103,6 +103,7 @@ import { DataService, RsvpStats } from '../../data.service';
 </section>
 </div>
   `,
+  styles: ``,
 })
 export class RsvpPage implements OnInit {
   private fb = inject(FormBuilder);
@@ -149,7 +150,9 @@ export class RsvpPage implements OnInit {
   pickAddress(v: string) { this.form.controls.address.setValue(v); this.suggestions.set([]); }
   hideSuggestionsSoon() { setTimeout(() => this.suggestions.set([]), 150); }
 
-  ngOnInit() { this.data.rsvpStats().then(s => this.stats.set(s)).catch(() => {}); }
+  ngOnInit() {
+    this.data.rsvpStats().then(s => this.stats.set(s)).catch(() => {});
+  }
 
   touched(field: 'name' | 'email' | 'phone' | 'address' | 'adults' | 'kids') {
     return this.form.controls[field].touched || this.form.controls[field].dirty || this.serverErrors()[field];

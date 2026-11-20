@@ -1,0 +1,9 @@
+{
+  "domain": "kbar.fun",
+  "username": "u374279249",
+  "type": "nodejs",
+  "appType": "express",
+  "entryFile": "server/index.js",
+  "buildScript": "build",
+  "nodeVersion": 22
+}
